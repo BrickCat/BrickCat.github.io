@@ -4,9 +4,9 @@
   <subtitle>毛子坤</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://brickcat.top/"/>
+  <link href="http://blog.githink.cn/"/>
   <updated>2018-03-29T07:41:37.736Z</updated>
-  <id>http://brickcat.top/</id>
+  <id>http://blog.githink.cn/</id>
   
   <author>
     <name>毛子坤</name>
@@ -17,8 +17,8 @@
   
   <entry>
     <title>Spring cloud config server 使用本地配置文件</title>
-    <link href="http://brickcat.top/2018/02/09/Spring-cloud-config-server-%E4%BD%BF%E7%94%A8%E6%9C%AC%E5%9C%B0%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/"/>
-    <id>http://brickcat.top/2018/02/09/Spring-cloud-config-server-使用本地配置文件/</id>
+    <link href="http://blog.githink.cn/2018/02/09/Spring-cloud-config-server-%E4%BD%BF%E7%94%A8%E6%9C%AC%E5%9C%B0%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/"/>
+    <id>http://blog.githink.cn/2018/02/09/Spring-cloud-config-server-使用本地配置文件/</id>
     <published>2018-02-09T14:32:36.000Z</published>
     <updated>2018-03-29T07:41:37.736Z</updated>
     
@@ -60,17 +60,17 @@
     
     </summary>
     
-      <category term="Spring Cloud" scheme="http://brickcat.top/categories/Spring-Cloud/"/>
+      <category term="Spring Cloud" scheme="http://blog.githink.cn/categories/Spring-Cloud/"/>
     
     
-      <category term="Spring Cloud" scheme="http://brickcat.top/tags/Spring-Cloud/"/>
+      <category term="Spring Cloud" scheme="http://blog.githink.cn/tags/Spring-Cloud/"/>
     
   </entry>
   
   <entry>
     <title>axios post提交参数java后台接收不到参数解决办法</title>
-    <link href="http://brickcat.top/2017/11/08/post%E4%BC%A0%E5%8F%82/"/>
-    <id>http://brickcat.top/2017/11/08/post传参/</id>
+    <link href="http://blog.githink.cn/2017/11/08/post%E4%BC%A0%E5%8F%82/"/>
+    <id>http://blog.githink.cn/2017/11/08/post传参/</id>
     <published>2017-11-08T05:37:31.000Z</published>
     <updated>2018-03-29T07:41:37.741Z</updated>
     
@@ -89,21 +89,21 @@
     
     </summary>
     
-      <category term="javascript" scheme="http://brickcat.top/categories/javascript/"/>
+      <category term="javascript" scheme="http://blog.githink.cn/categories/javascript/"/>
     
     
-      <category term="常见问题" scheme="http://brickcat.top/tags/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/"/>
+      <category term="axios" scheme="http://blog.githink.cn/tags/axios/"/>
     
-      <category term="axios" scheme="http://brickcat.top/tags/axios/"/>
+      <category term="javascript" scheme="http://blog.githink.cn/tags/javascript/"/>
     
-      <category term="javascript" scheme="http://brickcat.top/tags/javascript/"/>
+      <category term="常见问题" scheme="http://blog.githink.cn/tags/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/"/>
     
   </entry>
   
   <entry>
     <title>解决springboot-shiro-session设置过期时间无效的问题</title>
-    <link href="http://brickcat.top/2017/10/30/springboot-shiro-session/"/>
-    <id>http://brickcat.top/2017/10/30/springboot-shiro-session/</id>
+    <link href="http://blog.githink.cn/2017/10/30/springboot-shiro-session/"/>
+    <id>http://blog.githink.cn/2017/10/30/springboot-shiro-session/</id>
     <published>2017-10-30T06:19:19.000Z</published>
     <updated>2018-03-29T07:41:37.743Z</updated>
     
@@ -119,21 +119,21 @@
     
     </summary>
     
-      <category term="springboot framework" scheme="http://brickcat.top/categories/springboot-framework/"/>
+      <category term="springboot framework" scheme="http://blog.githink.cn/categories/springboot-framework/"/>
     
     
-      <category term="springboot" scheme="http://brickcat.top/tags/springboot/"/>
+      <category term="常见问题" scheme="http://blog.githink.cn/tags/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/"/>
     
-      <category term="shiro" scheme="http://brickcat.top/tags/shiro/"/>
+      <category term="springboot" scheme="http://blog.githink.cn/tags/springboot/"/>
     
-      <category term="常见问题" scheme="http://brickcat.top/tags/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/"/>
+      <category term="shiro" scheme="http://blog.githink.cn/tags/shiro/"/>
     
   </entry>
   
   <entry>
     <title>安装node以及npm学习ant-desgin</title>
-    <link href="http://brickcat.top/2017/09/20/%E5%AE%89%E8%A3%85node%E4%BB%A5%E5%8F%8Anpm%E5%AD%A6%E4%B9%A0ant-desgin/"/>
-    <id>http://brickcat.top/2017/09/20/安装node以及npm学习ant-desgin/</id>
+    <link href="http://blog.githink.cn/2017/09/20/%E5%AE%89%E8%A3%85node%E4%BB%A5%E5%8F%8Anpm%E5%AD%A6%E4%B9%A0ant-desgin/"/>
+    <id>http://blog.githink.cn/2017/09/20/安装node以及npm学习ant-desgin/</id>
     <published>2017-09-20T01:20:18.000Z</published>
     <updated>2018-03-29T07:41:37.759Z</updated>
     
@@ -151,27 +151,27 @@
     
     </summary>
     
-      <category term="react" scheme="http://brickcat.top/categories/react/"/>
+      <category term="react" scheme="http://blog.githink.cn/categories/react/"/>
     
-      <category term="node" scheme="http://brickcat.top/categories/react/node/"/>
+      <category term="node" scheme="http://blog.githink.cn/categories/react/node/"/>
     
     
-      <category term="react" scheme="http://brickcat.top/tags/react/"/>
+      <category term="react" scheme="http://blog.githink.cn/tags/react/"/>
     
-      <category term="ant-desgin" scheme="http://brickcat.top/tags/ant-desgin/"/>
+      <category term="ant-desgin" scheme="http://blog.githink.cn/tags/ant-desgin/"/>
     
-      <category term="dva" scheme="http://brickcat.top/tags/dva/"/>
+      <category term="dva" scheme="http://blog.githink.cn/tags/dva/"/>
     
-      <category term="npm" scheme="http://brickcat.top/tags/npm/"/>
+      <category term="npm" scheme="http://blog.githink.cn/tags/npm/"/>
     
-      <category term="node" scheme="http://brickcat.top/tags/node/"/>
+      <category term="node" scheme="http://blog.githink.cn/tags/node/"/>
     
   </entry>
   
   <entry>
     <title>安装 Semantic UI</title>
-    <link href="http://brickcat.top/2017/09/02/Semantic%20UI/"/>
-    <id>http://brickcat.top/2017/09/02/Semantic UI/</id>
+    <link href="http://blog.githink.cn/2017/09/02/Semantic%20UI/"/>
+    <id>http://blog.githink.cn/2017/09/02/Semantic UI/</id>
     <published>2017-09-02T15:43:05.000Z</published>
     <updated>2018-03-29T07:41:37.735Z</updated>
     
@@ -210,17 +210,17 @@
     
     </summary>
     
-      <category term="UI" scheme="http://brickcat.top/categories/UI/"/>
+      <category term="UI" scheme="http://blog.githink.cn/categories/UI/"/>
     
     
-      <category term="Semantic UI" scheme="http://brickcat.top/tags/Semantic-UI/"/>
+      <category term="Semantic UI" scheme="http://blog.githink.cn/tags/Semantic-UI/"/>
     
   </entry>
   
   <entry>
     <title>windows 搭建Git服务器</title>
-    <link href="http://brickcat.top/2017/08/31/windows%E6%90%AD%E5%BB%BAGit%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
-    <id>http://brickcat.top/2017/08/31/windows搭建Git服务器/</id>
+    <link href="http://blog.githink.cn/2017/08/31/windows%E6%90%AD%E5%BB%BAGit%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    <id>http://blog.githink.cn/2017/08/31/windows搭建Git服务器/</id>
     <published>2017-08-31T03:42:59.000Z</published>
     <updated>2018-03-29T07:41:37.744Z</updated>
     
@@ -297,19 +297,19 @@
     
     </summary>
     
-      <category term="服务器" scheme="http://brickcat.top/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+      <category term="服务器" scheme="http://blog.githink.cn/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
     
     
-      <category term="Git" scheme="http://brickcat.top/tags/Git/"/>
+      <category term="Git" scheme="http://blog.githink.cn/tags/Git/"/>
     
-      <category term="server" scheme="http://brickcat.top/tags/server/"/>
+      <category term="server" scheme="http://blog.githink.cn/tags/server/"/>
     
   </entry>
   
   <entry>
     <title>windows搭建流媒体服务器</title>
-    <link href="http://brickcat.top/2017/08/30/windows%E6%90%AD%E5%BB%BA%E6%B5%81%E5%AA%92%E4%BD%93%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
-    <id>http://brickcat.top/2017/08/30/windows搭建流媒体服务器/</id>
+    <link href="http://blog.githink.cn/2017/08/30/windows%E6%90%AD%E5%BB%BA%E6%B5%81%E5%AA%92%E4%BD%93%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    <id>http://blog.githink.cn/2017/08/30/windows搭建流媒体服务器/</id>
     <published>2017-08-30T03:42:59.000Z</published>
     <updated>2018-03-29T07:41:37.757Z</updated>
     
@@ -373,18 +373,18 @@
     
     </summary>
     
-      <category term="服务器" scheme="http://brickcat.top/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+      <category term="服务器" scheme="http://blog.githink.cn/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
     
-      <category term="环境配置" scheme="http://brickcat.top/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
+      <category term="环境配置" scheme="http://blog.githink.cn/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
     
     
-      <category term="server" scheme="http://brickcat.top/tags/server/"/>
+      <category term="server" scheme="http://blog.githink.cn/tags/server/"/>
     
-      <category term="nginx" scheme="http://brickcat.top/tags/nginx/"/>
+      <category term="nginx" scheme="http://blog.githink.cn/tags/nginx/"/>
     
-      <category term="ffmpeg" scheme="http://brickcat.top/tags/ffmpeg/"/>
+      <category term="ffmpeg" scheme="http://blog.githink.cn/tags/ffmpeg/"/>
     
-      <category term="hls" scheme="http://brickcat.top/tags/hls/"/>
+      <category term="hls" scheme="http://blog.githink.cn/tags/hls/"/>
     
   </entry>
   
