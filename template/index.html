@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>pageTitle | 爱健身的程序员 | 毛子坤</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="用户自定义页面功能演示">
+<meta property="og:type" content="website">
+<meta property="og:title" content="pageTitle">
+<meta property="og:url" content="http://brickcat.top/template/index.html">
+<meta property="og:site_name" content="爱健身的程序员">
+<meta property="og:description" content="用户自定义页面功能演示">
+<meta property="og:locale" content="zh">
+<meta property="og:updated_time" content="2018-03-29T07:41:37.769Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="pageTitle">
+<meta name="twitter:description" content="用户自定义页面功能演示">
+    
+        <link rel="alternate" type="application/atom+xml" title="爱健身的程序员" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">毛子坤</h5>
+          <a href="mailto:549595297@qq.com" title="549595297@qq.com" class="mail">549595297@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-server"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/BrickCat" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://code.githink.cn" target="_blank" >
+                <i class="icon icon-lg icon-paw"></i>
+                gogs
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">pageTitle</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header page-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">pageTitle</h1>
+        <h5 class="subtitle">
+            
+                用户自定义页面功能演示
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    <article class="page-article fade" itemprop="blogPage">
+        <div class="post-content page-content" id="page-content" itemprop="pageContent">
+            <p>当blockquote、img、pre、figure为第一级内容时，在page布局中拥有card阴影，所有标题居中展示</p>
+<p>目前的想法是预定义一系列内容模块，通过像输入 Markdown 标记一样来简单调用。好在 Markdown 没有把所有便于输入的符号占用，最终我定义了@moduleName{ … }这种标记格式。如果你使用过Asp.Net MVC，一定会很熟悉这种用法，没错，就是razor。</p>
+<p>page布局中的title和subtitle对应 Markdown 中的title和description。</p>
+<p>基本的内容容器还是card，你可以这样使用card：</p>
+<div class="card">
+<p>在<code>page</code>页中，建议把内容都放到<code>card</code>中。</p>
+</div>
+<p>需要注意的是：标记与内容之间必须空一行隔开。至于为何要这样，看到最后就明白了。</p>
+<p>与card标记类似，分栏的标记是这样的：</p>
+<div class="column-2">
+<div class="card">
+<h1 id="左"><a href="#左" class="headerlink" title="左"></a>左</h1></div>
+<div class="card">
+<h1 id="右"><a href="#右" class="headerlink" title="右"></a>右</h1></div>
+</div>
+<p>column中的每一列具有等宽、等高的特点，最多支持三栏：</p>
+<div class="column-3">
+<div class="card">
+<p>左</p>
+</div>
+<div class="card">
+<p>中</p>
+</div>
+<div class="card">
+<p>右</p>
+</div>
+</div>
+<p>在timeline模块中，你的 5 号标题#####和六号标题######将被“征用”，用作时间线上的标记点：</p>
+<div class="timeline">
+<h5 id="2016"><a href="#2016" class="headerlink" title="2016"></a>2016</h5><div class="item">
+<h6 id="11月6日"><a href="#11月6日" class="headerlink" title="11月6日"></a>11月6日</h6><p>第一行 </p>
+<p>第二行 /<em> ok </em>/</p>
+</div>
+<div class="item">
+<h6 id="11月6日-1"><a href="#11月6日-1" class="headerlink" title="11月6日"></a>11月6日</h6><p>第一行</p>
+<p>第二行 /<em> error </em>/</p>
+</div>
+</div>
+
+        </div>
+
+        
+        <div class="card page-about-me flex-row">
+            <a href="/" class="avatar waves-effect waves-circle waves-light"><img src="/img/avatar.jpg"></a>
+            <div class="content flex-col">
+                <p><strong>毛子坤</strong></p>
+                <p><em>毛子坤</em></p>
+                <p>一个热爱健身的IT工作者。</p>
+            </div>
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://brickcat.top/template/&title=《pageTitle》 — 爱健身的程序员&pic=http://brickcat.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://brickcat.top/template/&title=《pageTitle》 — 爱健身的程序员&source=健身 IT Nginx FFmpeg Fitness Java WeChat Android Web Html Video Js Css Ps" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://brickcat.top/template/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《pageTitle》 — 爱健身的程序员&url=http://brickcat.top/template/&via=http://brickcat.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://brickcat.top/template/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+        
+
+        
+
+
+        
+
+    </article>
+    
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>毛子坤 &copy; 2017 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://brickcat.top/template/&title=《pageTitle》 — 爱健身的程序员&pic=http://brickcat.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://brickcat.top/template/&title=《pageTitle》 — 爱健身的程序员&source=健身 IT Nginx FFmpeg Fitness Java WeChat Android Web Html Video Js Css Ps" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://brickcat.top/template/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《pageTitle》 — 爱健身的程序员&url=http://brickcat.top/template/&via=http://brickcat.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://brickcat.top/template/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAAByklEQVR42u3awarDMAwEwP7/T/fBu7ZxV5bttDA5FWrMJIdFlvx4xM/z/3n9/brm6t/xnosfXFzcNvc5fMbcq/VXoPH+YwMuLu55bhJeyco82vJwxMXF/WbuXL0xXomLi/vr3CTaPhQow91wcXG/jZsEzfh4kxxmkpdfdlbDxcVtcDsN01W/D/V3cXFx21OJaqglRUznwcXFPcMdDzzy41C+Q/VwFc1mcXFxN3Dzo0s/4OYqGVxc3PPc/NrEjusXSYSVSxxcXNxF3Or4M79gkQ9fo51xcXFv4vaLniQKJ18GFxd3M7fT9KweXeZeILongouLu4HbaW4mLZJlDRRcXNyD3KSFMRdYqxqvb0ocXFzcbdxVI9W5gMs/Ey4u7klup51RHZZUj0Bv1uDi4h7hJgPUe29GXfZ3cXFxt3GrU5dq+6N/3RMXF/cublK+JIi8qznZ0sXFxT3I3VGa5J+gMFbBxcU9wp2bbyZBNje4zf/FxcXdzc3DqxqCSdulHJS4uLgHuXkjIw+7ucPPh8TFxcX9Mm4/Vcoj1c5tEVxc3IPcvLjJy6lC8OHi4h7kVpukc5cz8jUL2iK4uLgNbr9hOlck5U1SXFzcg9w/AqBsw4tXxhAAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

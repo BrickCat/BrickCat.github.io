@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>解决springboot-shiro-session设置过期时间无效的问题 | 爱健身的程序员 | 毛子坤</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="springboot,shiro,常见问题">
+    <meta name="description" content="问题描述在springboot整合shiro的时候session总是过期，往往是刚刚登录没一两分钟就又要重新登陆。网上查了很多资料说是可以设置session的过期时间server.session.timeout，无论你设置成多少都无效，后来才知道此session和shiro的session根本就是两回事。">
+<meta name="keywords" content="springboot,shiro,常见问题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="解决springboot-shiro-session设置过期时间无效的问题">
+<meta property="og:url" content="http://brickcat.top/2017/10/30/springboot-shiro-session/index.html">
+<meta property="og:site_name" content="爱健身的程序员">
+<meta property="og:description" content="问题描述在springboot整合shiro的时候session总是过期，往往是刚刚登录没一两分钟就又要重新登陆。网上查了很多资料说是可以设置session的过期时间server.session.timeout，无论你设置成多少都无效，后来才知道此session和shiro的session根本就是两回事。">
+<meta property="og:locale" content="zh">
+<meta property="og:updated_time" content="2018-03-29T07:41:37.743Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="解决springboot-shiro-session设置过期时间无效的问题">
+<meta name="twitter:description" content="问题描述在springboot整合shiro的时候session总是过期，往往是刚刚登录没一两分钟就又要重新登陆。网上查了很多资料说是可以设置session的过期时间server.session.timeout，无论你设置成多少都无效，后来才知道此session和shiro的session根本就是两回事。">
+    
+        <link rel="alternate" type="application/atom+xml" title="爱健身的程序员" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">毛子坤</h5>
+          <a href="mailto:549595297@qq.com" title="549595297@qq.com" class="mail">549595297@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-server"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/BrickCat" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://code.githink.cn" target="_blank" >
+                <i class="icon icon-lg icon-paw"></i>
+                gogs
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">解决springboot-shiro-session设置过期时间无效的问题</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">解决springboot-shiro-session设置过期时间无效的问题</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-10-30T06:19:19.000Z" itemprop="datePublished" class="page-time">
+  2017-10-30
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/springboot-framework/">springboot framework</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#问题描述"><span class="post-toc-number">1.</span> <span class="post-toc-text">问题描述</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#解决办法"><span class="post-toc-number">2.</span> <span class="post-toc-text">解决办法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#后记"><span class="post-toc-number">3.</span> <span class="post-toc-text">后记</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-springboot-shiro-session"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">解决springboot-shiro-session设置过期时间无效的问题</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-10-30 14:19:19" datetime="2017-10-30T06:19:19.000Z"  itemprop="datePublished">2017-10-30</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/springboot-framework/">springboot framework</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>在<code>springboot</code>整合<code>shiro</code>的时候session总是过期，往往是刚刚登录没一两分钟就又要重新登陆。网上查了很多资料<br>说是可以设置session的过期时间<code>server.session.timeout</code>，无论你设置成多少都无效，后来才知道此session和shiro的session根本就是两回事。<br><a id="more"></a></p>
+<h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><p>下边我们就来看看在springboot中如何设置shiro的session过期时间。废话不多说直接上代码吧！</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 添加session管理器</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Bean</span>(name=<span class="string">"sessionManager"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> DefaultWebSessionManager <span class="title">defaultWebSessionManager</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	System.out.println(<span class="string">"ShiroConfiguration.defaultWebSessionManager()"</span>);</span><br><span class="line">	DefaultWebSessionManager sessionManager = <span class="keyword">new</span> DefaultWebSessionManager();</span><br><span class="line">	sessionManager.setCacheManager(cacheManager());</span><br><span class="line">	sessionManager.setSessionValidationInterval(<span class="number">3600000</span>*<span class="number">12</span>);</span><br><span class="line">	sessionManager.setGlobalSessionTimeout(<span class="number">3600000</span>*<span class="number">12</span>);</span><br><span class="line">	sessionManager.setDeleteInvalidSessions(<span class="keyword">true</span>);</span><br><span class="line">	sessionManager.setSessionValidationSchedulerEnabled(<span class="keyword">true</span>);</span><br><span class="line">	Cookie cookie = <span class="keyword">new</span> SimpleCookie(ShiroHttpSession.DEFAULT_SESSION_ID_NAME);</span><br><span class="line">	cookie.setName(<span class="string">"ITBC"</span>);</span><br><span class="line">	cookie.setHttpOnly(<span class="keyword">true</span>);</span><br><span class="line">	sessionManager.setSessionIdCookie(cookie);</span><br><span class="line">	<span class="keyword">return</span> sessionManager;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 用户授权信息Cache</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="meta">@Bean</span>(name = <span class="string">"shiroCacheManager"</span>)</span><br><span class="line">   <span class="meta">@ConditionalOnMissingBean</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> CacheManager <span class="title">cacheManager</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">new</span> MemoryConstrainedCacheManager();</span><br><span class="line">   &#125;</span><br><span class="line">   </span><br><span class="line">   <span class="meta">@Bean</span>(name = <span class="string">"securityManager"</span>)</span><br><span class="line">   <span class="meta">@ConditionalOnMissingBean</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> DefaultSecurityManager <span class="title">securityManager</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       DefaultSecurityManager sm = <span class="keyword">new</span> DefaultWebSecurityManager();</span><br><span class="line">       <span class="comment">//添加缓存</span></span><br><span class="line">       sm.setCacheManager(cacheManager());</span><br><span class="line">       <span class="comment">//添加session</span></span><br><span class="line">   	sm.setSessionManager(defaultWebSessionManager());</span><br><span class="line">       <span class="keyword">return</span> sm;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h3><p>其实在springboot的实际开发中博主遇到了很多坑，网上的解决办法也是零零碎碎的，总感觉不是自己想要的。有时间整理整理总结一下，发出来大家一起学习。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2018-03-29T07:41:37.743Z" itemprop="dateUpdated">2018-03-29 15:41:37</time>
+</span><br>
+
+
+        
+        <p style="font-size:16px;">欢迎大家去 <a href="https://brickcat.club" target="_blank" style="color:red;">搬砖猫</a> 社区注册互动，那里是黑客和健身热爱者的聚集地，那里有你需要的一切。</p><br/>本文首发于 毛子坤的博客（ http://brickcat.top ），版权所有，侵权必究。
+        
+    </div>
+    <footer>
+        <a href="http://brickcat.top">
+            <img src="/img/avatar.jpg" alt="毛子坤">
+            毛子坤
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shiro/">shiro</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/springboot/">springboot</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/常见问题/">常见问题</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://brickcat.top/2017/10/30/springboot-shiro-session/&title=《解决springboot-shiro-session设置过期时间无效的问题》 — 爱健身的程序员&pic=http://brickcat.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://brickcat.top/2017/10/30/springboot-shiro-session/&title=《解决springboot-shiro-session设置过期时间无效的问题》 — 爱健身的程序员&source=问题描述在springboot整合shiro的时候session总是过期，往往是刚刚登录没一两分钟就又要重新登陆。网上查了很多资料说是可以设置sessio..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://brickcat.top/2017/10/30/springboot-shiro-session/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《解决springboot-shiro-session设置过期时间无效的问题》 — 爱健身的程序员&url=http://brickcat.top/2017/10/30/springboot-shiro-session/&via=http://brickcat.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://brickcat.top/2017/10/30/springboot-shiro-session/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/11/08/post传参/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">axios post提交参数java后台接收不到参数解决办法</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/09/20/安装node以及npm学习ant-desgin/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">安装node以及npm学习ant-desgin</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=2142826"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        对你有帮助就赞助一下吧~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>毛子坤 &copy; 2017 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://brickcat.top/2017/10/30/springboot-shiro-session/&title=《解决springboot-shiro-session设置过期时间无效的问题》 — 爱健身的程序员&pic=http://brickcat.top/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://brickcat.top/2017/10/30/springboot-shiro-session/&title=《解决springboot-shiro-session设置过期时间无效的问题》 — 爱健身的程序员&source=问题描述在springboot整合shiro的时候session总是过期，往往是刚刚登录没一两分钟就又要重新登陆。网上查了很多资料说是可以设置sessio..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://brickcat.top/2017/10/30/springboot-shiro-session/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《解决springboot-shiro-session设置过期时间无效的问题》 — 爱健身的程序员&url=http://brickcat.top/2017/10/30/springboot-shiro-session/&via=http://brickcat.top" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://brickcat.top/2017/10/30/springboot-shiro-session/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJElEQVR42u3aS07EMBAFQO5/6WGLBIT33Bmk2OXVSERJlxfG/fn4iNfry1p7/vvv357Jv1IvDAyMxzJel+s6rOST+Xvyv/7wXQwMjAMYyeevf7ebkrOvn8HAwMC4Djc/fHMYBgYGxl2M9mI3T30xMDAw2stcnl7m70kKczfk4hgYGA9k5Efh//9+S38DAwPjUYxXua4vfO2TSUocRYWBgbE1Iz/gRunlvOifDH9gYGAcybg3oW2Ld3XBDgMDY1NGfji217g2xEmpDgMDY2/GWgKZDFvkh+ZkKzEwMM5hJNfB5LK41gS968KKgYGxK6MNug1lrQB3vUE37D0GBsajGO1QRVuyb9sJ+bb+sUEYGBjbMd4x+tCmuPkoRtHCxMDA2IjRYiatx2jAK26URvdQDAyMLRh54X6S9CbvmQyKYWBg7M3I61f5UEU7lnHDsAUGBsamjLwlOWlDrpXtFv9jYGBgbMpoQ5yc3+0RXAxbYGBgbMrIU9O23D8p0q2V5zAwMM5h3FXWb4Nee/OvBy4GBsZhjPwgblsF8zIcBgbGaYy8fLbWMGi/VaSvGBgYWzNe5cpDmZDaAhwGBsbejLXDbtKMzNPdt8+MYGBgPIqxdsiulfUnV8A/3oCBgXEAY3J1K4picfOyjRYDAwMjD+WGVDOOCgMDAyNJJtuhsaQ8tzjkgYGBcQBjMvSwRpqkrBgYGKcx2ova2hhZHvQ7Ul8MDIzHMj4BataTYX2Y9tsAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
