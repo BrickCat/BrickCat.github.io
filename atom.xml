@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>爱健身的程序员</title>
-  <subtitle>毛子坤</subtitle>
+  <title>信客博客</title>
+  <subtitle>githink</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.githink.cn/"/>
@@ -9,7 +9,7 @@
   <id>http://blog.githink.cn/</id>
   
   <author>
-    <name>毛子坤</name>
+    <name>信客</name>
     
   </author>
   
@@ -92,11 +92,11 @@
       <category term="javascript" scheme="http://blog.githink.cn/categories/javascript/"/>
     
     
+      <category term="常见问题" scheme="http://blog.githink.cn/tags/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/"/>
+    
       <category term="axios" scheme="http://blog.githink.cn/tags/axios/"/>
     
       <category term="javascript" scheme="http://blog.githink.cn/tags/javascript/"/>
-    
-      <category term="常见问题" scheme="http://blog.githink.cn/tags/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/"/>
     
   </entry>
   
@@ -122,11 +122,11 @@
       <category term="springboot framework" scheme="http://blog.githink.cn/categories/springboot-framework/"/>
     
     
-      <category term="常见问题" scheme="http://blog.githink.cn/tags/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/"/>
-    
       <category term="springboot" scheme="http://blog.githink.cn/tags/springboot/"/>
     
       <category term="shiro" scheme="http://blog.githink.cn/tags/shiro/"/>
+    
+      <category term="常见问题" scheme="http://blog.githink.cn/tags/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/"/>
     
   </entry>
   
