@@ -21,9 +21,9 @@
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="容器,kubernetes,k8s,helm">
+    <meta name="keywords" content="kubernetes,k8s,容器,helm">
     <meta name="description" content="1. Helm 客户端安装12345678# 1.官网下载二进制安装包wget https://storage.googleapis.com/kubernetes-helm/helm-v2.9.1-linux-amd64.tar.gz# 2.开始安装tar -zxvf helm-2.9.0.tar.gz# 3.移动到系统目录下mv helm-2.9.0/helm /usr/local/bin/he">
-<meta name="keywords" content="容器,kubernetes,k8s,helm">
+<meta name="keywords" content="kubernetes,k8s,容器,helm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="kubernetes 安装 helm">
 <meta property="og:url" content="https://blog.githink.cn/2018/09/13/kubernetes-安装-helm/index.html">
@@ -335,7 +335,11 @@
     <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
     <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
     <script>
+        var str = location.href;
+        var index = str .lastIndexOf("\/");
+        str  = str .substring(index + 1, str .length);
         var gitment = new Gitment({
+            id: str
             owner: 'githinkcn',
             repo: 'githinkcn.github.io',
             oauth: {

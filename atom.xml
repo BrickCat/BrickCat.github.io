@@ -84,11 +84,11 @@
       <category term="CI/CD" scheme="https://blog.githink.cn/categories/kubernetes/Docker/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/CI-CD/"/>
     
     
-      <category term="Docker" scheme="https://blog.githink.cn/tags/Docker/"/>
-    
       <category term="kubernetes" scheme="https://blog.githink.cn/tags/kubernetes/"/>
     
       <category term="k8s" scheme="https://blog.githink.cn/tags/k8s/"/>
+    
+      <category term="Docker" scheme="https://blog.githink.cn/tags/Docker/"/>
     
       <category term="CI/CD" scheme="https://blog.githink.cn/tags/CI-CD/"/>
     
@@ -136,11 +136,11 @@
       <category term="k8s" scheme="https://blog.githink.cn/categories/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/kubernetes/docker/k8s/"/>
     
     
-      <category term="容器" scheme="https://blog.githink.cn/tags/%E5%AE%B9%E5%99%A8/"/>
-    
       <category term="kubernetes" scheme="https://blog.githink.cn/tags/kubernetes/"/>
     
       <category term="k8s" scheme="https://blog.githink.cn/tags/k8s/"/>
+    
+      <category term="容器" scheme="https://blog.githink.cn/tags/%E5%AE%B9%E5%99%A8/"/>
     
       <category term="helm" scheme="https://blog.githink.cn/tags/helm/"/>
     
@@ -340,13 +340,13 @@
       <category term="容器技术" scheme="https://blog.githink.cn/categories/kubernetes/k8s/Docker/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/"/>
     
     
-      <category term="Docker" scheme="https://blog.githink.cn/tags/Docker/"/>
-    
-      <category term="容器" scheme="https://blog.githink.cn/tags/%E5%AE%B9%E5%99%A8/"/>
-    
       <category term="kubernetes" scheme="https://blog.githink.cn/tags/kubernetes/"/>
     
       <category term="k8s" scheme="https://blog.githink.cn/tags/k8s/"/>
+    
+      <category term="Docker" scheme="https://blog.githink.cn/tags/Docker/"/>
+    
+      <category term="容器" scheme="https://blog.githink.cn/tags/%E5%AE%B9%E5%99%A8/"/>
     
   </entry>
   
@@ -534,11 +534,11 @@
       <category term="k8s" scheme="https://blog.githink.cn/categories/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/kubernetes/docker/k8s/"/>
     
     
-      <category term="容器" scheme="https://blog.githink.cn/tags/%E5%AE%B9%E5%99%A8/"/>
-    
       <category term="kubernetes" scheme="https://blog.githink.cn/tags/kubernetes/"/>
     
       <category term="k8s" scheme="https://blog.githink.cn/tags/k8s/"/>
+    
+      <category term="容器" scheme="https://blog.githink.cn/tags/%E5%AE%B9%E5%99%A8/"/>
     
       <category term="docker" scheme="https://blog.githink.cn/tags/docker/"/>
     
