@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blog.githink.cn/"/>
-  <updated>2018-09-13T03:30:04.442Z</updated>
+  <updated>2018-09-13T03:33:32.977Z</updated>
   <id>https://blog.githink.cn/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://blog.githink.cn/2018/09/13/Kuberbetes-CI-CD-%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90Spring-Cloud/"/>
     <id>https://blog.githink.cn/2018/09/13/Kuberbetes-CI-CD-持续集成Spring-Cloud/</id>
     <published>2018-09-13T03:05:56.000Z</published>
-    <updated>2018-09-13T03:30:04.442Z</updated>
+    <updated>2018-09-13T03:33:32.977Z</updated>
     
     <content type="html"><![CDATA[<h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>在现在这个科技不断快速发展的时代，我们产品的快速迭代变得十分重要，每个公司都有自己的迭代计划，有的是一个礼拜一个版本迭代，有的是半个月，也有的是更加频繁的迭代，面对这些迭代我们如何快速的平滑的发布应用就产生了 CI/CD，即持续集成和持续部署。</p>
 <p>本场 Chat 会从零开始教会大家如何将我们的应用持续的，分场景、环境的持续的部署到 Kubernetes 集群中，以及我们的应用如何在不同的场景下，平滑的升级，以及构建我们自己的 Docker 私有仓库、代码托管服务、Jenkins 构建服务。</p>
@@ -48,7 +48,7 @@
 <li>Jenkins 将最新的镜像部署到 k8s 中</li>
 <li>将部署反馈发送给用户</li>
 </ol>
-<p>由于GitChat版权限制，这篇实战教程不能免费发于个人博客中，所有希望有需要的朋友可以去GitChat支持一下信客，信客在这里谢过各位大大了。</p>
+<p>由于GitChat版权限制，这篇实战教程不能免费发于个人博客中，这篇文章定价<code>5元</code>，总共77页。所以希望有需要的朋友可以去GitChat支持一下信客，信客在这里谢过各位大大了。</p>
 <h3 id="教程目录："><a href="#教程目录：" class="headerlink" title="教程目录："></a>教程目录：</h3><ol>
 <li>实验环境概览<br></li>
 <li>虚拟机和必要软件安装<br></li>
@@ -829,9 +829,9 @@
       <category term="服务器" scheme="https://blog.githink.cn/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
     
     
-      <category term="Git" scheme="https://blog.githink.cn/tags/Git/"/>
-    
       <category term="server" scheme="https://blog.githink.cn/tags/server/"/>
+    
+      <category term="Git" scheme="https://blog.githink.cn/tags/Git/"/>
     
   </entry>
   
@@ -907,13 +907,13 @@
       <category term="环境配置" scheme="https://blog.githink.cn/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
     
     
-      <category term="server" scheme="https://blog.githink.cn/tags/server/"/>
-    
       <category term="nginx" scheme="https://blog.githink.cn/tags/nginx/"/>
     
       <category term="ffmpeg" scheme="https://blog.githink.cn/tags/ffmpeg/"/>
     
       <category term="hls" scheme="https://blog.githink.cn/tags/hls/"/>
+    
+      <category term="server" scheme="https://blog.githink.cn/tags/server/"/>
     
   </entry>
   
