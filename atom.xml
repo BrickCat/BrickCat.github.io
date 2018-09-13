@@ -621,11 +621,11 @@
       <category term="javascript" scheme="https://blog.githink.cn/categories/javascript/"/>
     
     
-      <category term="常见问题" scheme="https://blog.githink.cn/tags/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/"/>
-    
       <category term="axios" scheme="https://blog.githink.cn/tags/axios/"/>
     
       <category term="javascript" scheme="https://blog.githink.cn/tags/javascript/"/>
+    
+      <category term="常见问题" scheme="https://blog.githink.cn/tags/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/"/>
     
   </entry>
   
@@ -651,11 +651,11 @@
       <category term="springboot framework" scheme="https://blog.githink.cn/categories/springboot-framework/"/>
     
     
+      <category term="常见问题" scheme="https://blog.githink.cn/tags/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/"/>
+    
       <category term="springboot" scheme="https://blog.githink.cn/tags/springboot/"/>
     
       <category term="shiro" scheme="https://blog.githink.cn/tags/shiro/"/>
-    
-      <category term="常见问题" scheme="https://blog.githink.cn/tags/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/"/>
     
   </entry>
   
@@ -829,9 +829,9 @@
       <category term="服务器" scheme="https://blog.githink.cn/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
     
     
-      <category term="Git" scheme="https://blog.githink.cn/tags/Git/"/>
-    
       <category term="server" scheme="https://blog.githink.cn/tags/server/"/>
+    
+      <category term="Git" scheme="https://blog.githink.cn/tags/Git/"/>
     
   </entry>
   
@@ -907,13 +907,13 @@
       <category term="环境配置" scheme="https://blog.githink.cn/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
     
     
-      <category term="server" scheme="https://blog.githink.cn/tags/server/"/>
-    
       <category term="nginx" scheme="https://blog.githink.cn/tags/nginx/"/>
     
       <category term="ffmpeg" scheme="https://blog.githink.cn/tags/ffmpeg/"/>
     
       <category term="hls" scheme="https://blog.githink.cn/tags/hls/"/>
+    
+      <category term="server" scheme="https://blog.githink.cn/tags/server/"/>
     
   </entry>
   
