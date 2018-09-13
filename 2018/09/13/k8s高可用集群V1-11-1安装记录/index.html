@@ -21,9 +21,9 @@
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="容器,kubernetes,k8s,docker">
+    <meta name="keywords" content="kubernetes,k8s,容器,docker">
     <meta name="description" content="实验环境   hostname IP 内存 职责     k8s-vip 192.168.1.110 —— VIP（虚拟IP）   k8s-master1 192.168.1.111 4G Master,Keepalived,HAProxy   k8s-master2 192.168.1.112 4G Master,Keepalived,HAProxy   k8s-master3 192.168.">
-<meta name="keywords" content="容器,kubernetes,k8s,docker">
+<meta name="keywords" content="kubernetes,k8s,容器,docker">
 <meta property="og:type" content="article">
 <meta property="og:title" content="k8s高可用集群V1.11.1安装记录">
 <meta property="og:url" content="https://blog.githink.cn/2018/09/13/k8s高可用集群V1-11-1安装记录/index.html">
@@ -129,7 +129,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="搜尋">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -279,7 +279,7 @@
     <div class="content">
         
 <span class="post-time">
-    最後更新時間：<time datetime="2018-09-13T02:35:20.482Z" itemprop="dateUpdated">2018-09-13 10:35:20</time>
+    Last updated: <time datetime="2018-09-13T02:35:20.482Z" itemprop="dateUpdated">2018-09-13 10:35:20</time>
 </span><br>
 
 
@@ -415,11 +415,8 @@ k8s-master1..." data-title=" QQ">
     <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
     <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
     <script>
-        var str = location.href;
-        var index = str .lastIndexOf("\/");
-        str  = str .substring(index + 1, str .length);
         var gitment = new Gitment({
-            id: str,
+            id: 'k8s高可用集群V1.11.1安装记录',
             owner: 'githinkcn',
             repo: 'githinkcn.github.io',
             oauth: {
@@ -483,7 +480,7 @@ k8s-master1..." data-title=" QQ">
             
                 <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
             
-            <span>本部落格係採用<a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh_TW">創用 CC 姓名標示 4.0 國際 授權條款授權</a></span>
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
         </p>
     </div>
     <div class="bottom">
