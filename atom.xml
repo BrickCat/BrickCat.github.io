@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blog.githink.cn/"/>
-  <updated>2018-09-13T02:47:48.971Z</updated>
+  <updated>2018-09-13T03:30:04.442Z</updated>
   <id>https://blog.githink.cn/</id>
   
   <author>
@@ -14,6 +14,87 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Kuberbetes CI/CD 持续集成Spring Cloud</title>
+    <link href="https://blog.githink.cn/2018/09/13/Kuberbetes-CI-CD-%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90Spring-Cloud/"/>
+    <id>https://blog.githink.cn/2018/09/13/Kuberbetes-CI-CD-持续集成Spring-Cloud/</id>
+    <published>2018-09-13T03:05:56.000Z</published>
+    <updated>2018-09-13T03:30:04.442Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>在现在这个科技不断快速发展的时代，我们产品的快速迭代变得十分重要，每个公司都有自己的迭代计划，有的是一个礼拜一个版本迭代，有的是半个月，也有的是更加频繁的迭代，面对这些迭代我们如何快速的平滑的发布应用就产生了 CI/CD，即持续集成和持续部署。</p>
+<p>本场 Chat 会从零开始教会大家如何将我们的应用持续的，分场景、环境的持续的部署到 Kubernetes 集群中，以及我们的应用如何在不同的场景下，平滑的升级，以及构建我们自己的 Docker 私有仓库、代码托管服务、Jenkins 构建服务。</p>
+<p>本场 Chat 将学到如下内容：</p>
+<ol>
+<li>Docker 私有仓库搭建，以及 Kubernetes 中使用私有仓库；</li>
+<li>使用 Docker 搭建代码托管服务（ GitLab）；</li>
+<li>搭建 Kubernetes 1.11.2版的的基础集群和可视化管理；</li>
+<li>搭建 Jenkins 构建服务，利用 Pipeline 对应用镜像编译发布；</li>
+<li>如何将以上服务串联起来组成一个完整的持续集成的流水线；</li>
+<li>Jenkins 构建服务如何构建不同分支上的代码，并发布到不同的环境中；</li>
+<li>一些常见问题的解决办法。</li>
+</ol>
+<p>我们先来看看实现这个持续集成的流水线：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://images.gitbook.cn/af6c4350-ab88-11e8-84f3-15434a82342c" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<ol>
+<li>开发人员提交代码 Gitlab 远程触发 Jenkins 构建</li>
+<li>Jenkins 构建镜像推送到私有仓库</li>
+<li>Jenkins 将最新的镜像部署到 k8s 中</li>
+<li>将部署反馈发送给用户</li>
+</ol>
+<p>由于GitChat版权限制，这篇实战教程不能免费发于个人博客中，所有希望有需要的朋友可以去GitChat支持一下信客，信客在这里谢过各位大大了。</p>
+<h3 id="教程目录："><a href="#教程目录：" class="headerlink" title="教程目录："></a>教程目录：</h3><ol>
+<li>实验环境概览<br></li>
+<li>虚拟机和必要软件安装<br></li>
+<li>搭建 Docker 私有仓库：Harbor<br></li>
+<li>搭建代码托管服务：GitLab<br></li>
+<li>搭建 Jenkins 服务<br></li>
+<li>搭建 k8s 集群 <br></li>
+<li>搭建完整的持续的流水线<br></li>
+<li>常见问题和常用命令<br></li>
+<li>效果预览</li>
+</ol>
+<h3 id="GitChat地址"><a href="#GitChat地址" class="headerlink" title="GitChat地址"></a>GitChat地址</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/2018/09/13/Kuberbetes-CI-CD-持续集成Spring-Cloud/微信图片_20180913111445.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;写在前面&quot;&gt;&lt;a href=&quot;#写在前面&quot; class=&quot;headerlink&quot; title=&quot;写在前面&quot;&gt;&lt;/a&gt;写在前面&lt;/h3&gt;&lt;p&gt;在现在这个科技不断快速发展的时代，我们产品的快速迭代变得十分重要，每个公司都有自己的迭代计划，有的是一个礼拜一个版本迭代，有
+    
+    </summary>
+    
+      <category term="kubernetes" scheme="https://blog.githink.cn/categories/kubernetes/"/>
+    
+      <category term="Docker" scheme="https://blog.githink.cn/categories/kubernetes/Docker/"/>
+    
+      <category term="容器技术" scheme="https://blog.githink.cn/categories/kubernetes/Docker/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/"/>
+    
+      <category term="CI/CD" scheme="https://blog.githink.cn/categories/kubernetes/Docker/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/CI-CD/"/>
+    
+    
+      <category term="Docker" scheme="https://blog.githink.cn/tags/Docker/"/>
+    
+      <category term="kubernetes" scheme="https://blog.githink.cn/tags/kubernetes/"/>
+    
+      <category term="k8s" scheme="https://blog.githink.cn/tags/k8s/"/>
+    
+      <category term="CI/CD" scheme="https://blog.githink.cn/tags/CI-CD/"/>
+    
+      <category term="SpringCloud" scheme="https://blog.githink.cn/tags/SpringCloud/"/>
+    
+  </entry>
   
   <entry>
     <title>kubernetes 安装 helm</title>

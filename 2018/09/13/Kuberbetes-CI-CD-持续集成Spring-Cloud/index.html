@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Kuberbetes CI/CD 持续集成Spring Cloud | 信客博客 | githink.cn</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Docker,kubernetes,k8s,CI/CD,SpringCloud">
+    <meta name="description" content="写在前面在现在这个科技不断快速发展的时代，我们产品的快速迭代变得十分重要，每个公司都有自己的迭代计划，有的是一个礼拜一个版本迭代，有的是半个月，也有的是更加频繁的迭代，面对这些迭代我们如何快速的平滑的发布应用就产生了 CI/CD，即持续集成和持续部署。 本场 Chat 会从零开始教会大家如何将我们的应用持续的，分场景、环境的持续的部署到 Kubernetes 集群中，以及我们的应用如何在不同的场景">
+<meta name="keywords" content="Docker,kubernetes,k8s,CI&#x2F;CD,SpringCloud">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kuberbetes CI&#x2F;CD 持续集成Spring Cloud">
+<meta property="og:url" content="https://blog.githink.cn/2018/09/13/Kuberbetes-CI-CD-持续集成Spring-Cloud/index.html">
+<meta property="og:site_name" content="信客博客">
+<meta property="og:description" content="写在前面在现在这个科技不断快速发展的时代，我们产品的快速迭代变得十分重要，每个公司都有自己的迭代计划，有的是一个礼拜一个版本迭代，有的是半个月，也有的是更加频繁的迭代，面对这些迭代我们如何快速的平滑的发布应用就产生了 CI/CD，即持续集成和持续部署。 本场 Chat 会从零开始教会大家如何将我们的应用持续的，分场景、环境的持续的部署到 Kubernetes 集群中，以及我们的应用如何在不同的场景">
+<meta property="og:locale" content="zh">
+<meta property="og:image" content="https://images.gitbook.cn/af6c4350-ab88-11e8-84f3-15434a82342c">
+<meta property="og:image" content="https://blog.githink.cn/2018/09/13/Kuberbetes-CI-CD-持续集成Spring-Cloud/微信图片_20180913111445.jpg">
+<meta property="og:updated_time" content="2018-09-13T03:30:04.442Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kuberbetes CI&#x2F;CD 持续集成Spring Cloud">
+<meta name="twitter:description" content="写在前面在现在这个科技不断快速发展的时代，我们产品的快速迭代变得十分重要，每个公司都有自己的迭代计划，有的是一个礼拜一个版本迭代，有的是半个月，也有的是更加频繁的迭代，面对这些迭代我们如何快速的平滑的发布应用就产生了 CI/CD，即持续集成和持续部署。 本场 Chat 会从零开始教会大家如何将我们的应用持续的，分场景、环境的持续的部署到 Kubernetes 集群中，以及我们的应用如何在不同的场景">
+<meta name="twitter:image" content="https://images.gitbook.cn/af6c4350-ab88-11e8-84f3-15434a82342c">
+    
+        <link rel="alternate" type="application/atom+xml" title="信客博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">信客</h5>
+          <a href="mailto:549595297@qq.com" title="549595297@qq.com" class="mail">549595297@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://blog.githink.cn/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://blog.githink.cn/categories"  >
+                <i class="icon icon-lg icon-server"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/githinkcn" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://code.githink.cn" target="_blank" >
+                <i class="icon icon-lg icon-paw"></i>
+                gogs
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Kuberbetes CI/CD 持续集成Spring Cloud</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Kuberbetes CI/CD 持续集成Spring Cloud</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-09-13T03:05:56.000Z" itemprop="datePublished" class="page-time">
+  2018-09-13
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/kubernetes/">kubernetes</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/kubernetes/Docker/">Docker</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/kubernetes/Docker/容器技术/">容器技术</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/kubernetes/Docker/容器技术/CI-CD/">CI/CD</a></li></ul></li></ul></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#写在前面"><span class="post-toc-number">1.</span> <span class="post-toc-text">写在前面</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#教程目录："><span class="post-toc-number">2.</span> <span class="post-toc-text">教程目录：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#GitChat地址"><span class="post-toc-number">3.</span> <span class="post-toc-text">GitChat地址</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-Kuberbetes-CI-CD-持续集成Spring-Cloud"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Kuberbetes CI/CD 持续集成Spring Cloud</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-09-13 11:05:56" datetime="2018-09-13T03:05:56.000Z"  itemprop="datePublished">2018-09-13</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/kubernetes/">kubernetes</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/kubernetes/Docker/">Docker</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/kubernetes/Docker/容器技术/">容器技术</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/kubernetes/Docker/容器技术/CI-CD/">CI/CD</a></li></ul></li></ul></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>在现在这个科技不断快速发展的时代，我们产品的快速迭代变得十分重要，每个公司都有自己的迭代计划，有的是一个礼拜一个版本迭代，有的是半个月，也有的是更加频繁的迭代，面对这些迭代我们如何快速的平滑的发布应用就产生了 CI/CD，即持续集成和持续部署。</p>
+<p>本场 Chat 会从零开始教会大家如何将我们的应用持续的，分场景、环境的持续的部署到 Kubernetes 集群中，以及我们的应用如何在不同的场景下，平滑的升级，以及构建我们自己的 Docker 私有仓库、代码托管服务、Jenkins 构建服务。</p>
+<p>本场 Chat 将学到如下内容：</p>
+<ol>
+<li>Docker 私有仓库搭建，以及 Kubernetes 中使用私有仓库；</li>
+<li>使用 Docker 搭建代码托管服务（ GitLab）；</li>
+<li>搭建 Kubernetes 1.11.2版的的基础集群和可视化管理；</li>
+<li>搭建 Jenkins 构建服务，利用 Pipeline 对应用镜像编译发布；</li>
+<li>如何将以上服务串联起来组成一个完整的持续集成的流水线；</li>
+<li>Jenkins 构建服务如何构建不同分支上的代码，并发布到不同的环境中；</li>
+<li>一些常见问题的解决办法。</li>
+</ol>
+<p>我们先来看看实现这个持续集成的流水线：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://images.gitbook.cn/af6c4350-ab88-11e8-84f3-15434a82342c" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<ol>
+<li>开发人员提交代码 Gitlab 远程触发 Jenkins 构建</li>
+<li>Jenkins 构建镜像推送到私有仓库</li>
+<li>Jenkins 将最新的镜像部署到 k8s 中</li>
+<li>将部署反馈发送给用户</li>
+</ol>
+<p>由于GitChat版权限制，这篇实战教程不能免费发于个人博客中，所有希望有需要的朋友可以去GitChat支持一下信客，信客在这里谢过各位大大了。</p>
+<h3 id="教程目录："><a href="#教程目录：" class="headerlink" title="教程目录："></a>教程目录：</h3><ol>
+<li>实验环境概览<br></li>
+<li>虚拟机和必要软件安装<br></li>
+<li>搭建 Docker 私有仓库：Harbor<br></li>
+<li>搭建代码托管服务：GitLab<br></li>
+<li>搭建 Jenkins 服务<br></li>
+<li>搭建 k8s 集群 <br></li>
+<li>搭建完整的持续的流水线<br></li>
+<li>常见问题和常用命令<br></li>
+<li>效果预览</li>
+</ol>
+<h3 id="GitChat地址"><a href="#GitChat地址" class="headerlink" title="GitChat地址"></a>GitChat地址</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/2018/09/13/Kuberbetes-CI-CD-持续集成Spring-Cloud/微信图片_20180913111445.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2018-09-13T03:30:04.442Z" itemprop="dateUpdated">2018-09-13 11:30:04</time>
+</span><br>
+
+
+        
+        <p style="font-size:16px;">欢迎大家去 <a href="https://githink.cn" target="_blank" style="color:red;">信客</a> 社区注册互动，那里是黑客和健身热爱者的聚集地，那里有你需要的一切。</p><br/>本文首发于 信客博客（ http://blog.githink.cn ），版权所有，侵权必究。
+        
+    </div>
+    <footer>
+        <a href="https://blog.githink.cn">
+            <img src="/img/avatar.png" alt="信客">
+            信客
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CI-CD/">CI/CD</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/">Docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringCloud/">SpringCloud</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/k8s/">k8s</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kubernetes/">kubernetes</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.githink.cn/2018/09/13/Kuberbetes-CI-CD-持续集成Spring-Cloud/&title=《Kuberbetes CI/CD 持续集成Spring Cloud》 — 信客博客&pic=https://blog.githink.cn/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blog.githink.cn/2018/09/13/Kuberbetes-CI-CD-持续集成Spring-Cloud/&title=《Kuberbetes CI/CD 持续集成Spring Cloud》 — 信客博客&source=健身 IT Nginx FFmpeg Fitness Java WeChat Android Web Html Video Js Css Ps Kuber..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.githink.cn/2018/09/13/Kuberbetes-CI-CD-持续集成Spring-Cloud/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Kuberbetes CI/CD 持续集成Spring Cloud》 — 信客博客&url=https://blog.githink.cn/2018/09/13/Kuberbetes-CI-CD-持续集成Spring-Cloud/&via=https://blog.githink.cn" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.githink.cn/2018/09/13/Kuberbetes-CI-CD-持续集成Spring-Cloud/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/09/13/kubernetes-安装-helm/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">kubernetes 安装 helm</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=2142826"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        对你有帮助就赞助一下吧~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>信客 &copy; 2017 - 2018</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">鲁ICP备18040779号</a><br>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.githink.cn/2018/09/13/Kuberbetes-CI-CD-持续集成Spring-Cloud/&title=《Kuberbetes CI/CD 持续集成Spring Cloud》 — 信客博客&pic=https://blog.githink.cn/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blog.githink.cn/2018/09/13/Kuberbetes-CI-CD-持续集成Spring-Cloud/&title=《Kuberbetes CI/CD 持续集成Spring Cloud》 — 信客博客&source=健身 IT Nginx FFmpeg Fitness Java WeChat Android Web Html Video Js Css Ps Kuber..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.githink.cn/2018/09/13/Kuberbetes-CI-CD-持续集成Spring-Cloud/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Kuberbetes CI/CD 持续集成Spring Cloud》 — 信客博客&url=https://blog.githink.cn/2018/09/13/Kuberbetes-CI-CD-持续集成Spring-Cloud/&via=https://blog.githink.cn" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.githink.cn/2018/09/13/Kuberbetes-CI-CD-持续集成Spring-Cloud/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACpUlEQVR42u3awW4rIQwF0Pz/T+dJXT0pyvTaxpOqPayiNGU4LDBz4fGI2/OrJZ///+a6n9fvX//6fGmPjYaHh4fXGvq7dk1K+uz98vqbZMx4eHh427xqMXg3BdeL+6QUJVOMh4eH99N4+XI8/x4PDw/vd/Dmn5P+q2PAw8PD+xQvCSOq5SHZgucjWc9a8PDw8GpjOHYAds/nj53v4eHh/Xnec9yqS3xyxHWq4eHh4W3w5gdU1SP/fJPdC3xHtxjw8PDwinvR+eLeiyfyYLdalvDw8PA2eJPFff7unzxrdDCGh4eHt3bm3tu89h6c95D333xjwMPDw2vxElL+yOpyf+qqwds+8fDw8BZ414PLC0MeBE9+U41F8PDw8DZ4OWxSNnqx7Hwq8fDw8O7h5S//1asGkwOwJJjAw8PDu59XXZp7G+JeQept9PHw8PC2eXlhmExNFTwaDx4eHt4tvF4EUP2vfIs8usKFh4eHdyNvsoHuXVrNey4EHHh4eHgLvDw8nQe4+YJ+OCDGw8PDW+Dlg6gejFUvIiS/HF0swMPDwzvES0jzo6kc3As1vtlS4+Hh4R3iJS/8Z68U5MHEgQ03Hh4e3gKvuuzmU1C9iFAtUXmxwcPDw9vg9cLcZLnPo4Re/FHoAQ8PD2+Blwe1vVLRKy29CS2/T+Dh4eEVefO4obro50+ZbN/x8PDw7uH1Lk7lS3keH1Tr2Ns+8fDw8I7ynsWWXybIA+JJqPFNYcPDw8Nb4M2Did6AegdaeYz7qDY8PDy8Iq8aFswvYE36TLbseHh4ePfwJveUzi7xk4gEDw8P7yfzqteqkpLQKyHRlhoPDw/vQ7x5aJtPwbHjNDw8PLw1XjWQnYQRydHafGrw8PDw9nhnD8Ami3t1w33g0gAeHh5ejfcPkVUDJ4xcqAQAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
