@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>kubernetes 安装 helm | 信客博客 | githink.cn</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="容器,kubernetes,k8s,helm">
+    <meta name="description" content="1. Helm 客户端安装12345678# 1.官网下载二进制安装包wget https://storage.googleapis.com/kubernetes-helm/helm-v2.9.1-linux-amd64.tar.gz# 2.开始安装tar -zxvf helm-2.9.0.tar.gz# 3.移动到系统目录下mv helm-2.9.0/helm /usr/local/bin/he">
+<meta name="keywords" content="容器,kubernetes,k8s,helm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="kubernetes 安装 helm">
+<meta property="og:url" content="http://blog.githink.cn/2018/09/13/kubernetes-安装-helm/index.html">
+<meta property="og:site_name" content="信客博客">
+<meta property="og:description" content="1. Helm 客户端安装12345678# 1.官网下载二进制安装包wget https://storage.googleapis.com/kubernetes-helm/helm-v2.9.1-linux-amd64.tar.gz# 2.开始安装tar -zxvf helm-2.9.0.tar.gz# 3.移动到系统目录下mv helm-2.9.0/helm /usr/local/bin/he">
+<meta property="og:locale" content="zh">
+<meta property="og:updated_time" content="2018-09-13T02:47:48.971Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="kubernetes 安装 helm">
+<meta name="twitter:description" content="1. Helm 客户端安装12345678# 1.官网下载二进制安装包wget https://storage.googleapis.com/kubernetes-helm/helm-v2.9.1-linux-amd64.tar.gz# 2.开始安装tar -zxvf helm-2.9.0.tar.gz# 3.移动到系统目录下mv helm-2.9.0/helm /usr/local/bin/he">
+    
+        <link rel="alternate" type="application/atom+xml" title="信客博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">信客</h5>
+          <a href="mailto:549595297@qq.com" title="549595297@qq.com" class="mail">549595297@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-server"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/githinkcn" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://code.githink.cn" target="_blank" >
+                <i class="icon icon-lg icon-paw"></i>
+                gogs
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">kubernetes 安装 helm</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">kubernetes 安装 helm</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-09-13T02:46:49.000Z" itemprop="datePublished" class="page-time">
+  2018-09-13
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/容器技术/">容器技术</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/容器技术/kubernetes/">kubernetes</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/容器技术/kubernetes/docker/">docker</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/容器技术/kubernetes/docker/k8s/">k8s</a></li></ul></li></ul></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-Helm-客户端安装"><span class="post-toc-number">1.</span> <span class="post-toc-text">1. Helm 客户端安装</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-Helm-服务端安装"><span class="post-toc-number">2.</span> <span class="post-toc-text">2. Helm 服务端安装</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-验证"><span class="post-toc-number">3.</span> <span class="post-toc-text">4. 验证</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-Helm使用"><span class="post-toc-number">4.</span> <span class="post-toc-text">5. Helm使用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5-1-更换仓库"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">5.1. 更换仓库</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5-2-查看仓库中charts"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">5.2. 查看仓库中charts</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5-3-更新charts列表"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">5.3. 更新charts列表</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5-4-安装charts"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">5.4.安装charts</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#5-4-1-安装Nginx-Ingress-controller，安装的k8s集群启用了RBAC，则一定要加rbac-create-true参数"><span class="post-toc-number">4.4.1.</span> <span class="post-toc-text">5.4.1 安装Nginx Ingress controller，安装的k8s集群启用了RBAC，则一定要加rbac.create=true参数</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#5-4-2-安装Monocular"><span class="post-toc-number">4.4.2.</span> <span class="post-toc-text">5.4.2 安装Monocular</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#5-4-3-查看需要安装的values"><span class="post-toc-number">4.4.3.</span> <span class="post-toc-text">5.4.3 查看需要安装的values</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5-5-查看K8S中已安装的charts"><span class="post-toc-number">4.5.</span> <span class="post-toc-text">5.5 查看K8S中已安装的charts</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5-6-删除安装的charts"><span class="post-toc-number">4.6.</span> <span class="post-toc-text">5.6 删除安装的charts</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#6-卸载Helm服务端"><span class="post-toc-number">5.</span> <span class="post-toc-text">6. 卸载Helm服务端</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#7-参考地址："><span class="post-toc-number">6.</span> <span class="post-toc-text">7. 参考地址：</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-kubernetes-安装-helm"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">kubernetes 安装 helm</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-09-13 10:46:49" datetime="2018-09-13T02:46:49.000Z"  itemprop="datePublished">2018-09-13</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/容器技术/">容器技术</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/容器技术/kubernetes/">kubernetes</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/容器技术/kubernetes/docker/">docker</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/容器技术/kubernetes/docker/k8s/">k8s</a></li></ul></li></ul></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="1-Helm-客户端安装"><a href="#1-Helm-客户端安装" class="headerlink" title="1. Helm 客户端安装"></a>1. Helm 客户端安装</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 1.官网下载二进制安装包</span><br><span class="line">wget https://storage.googleapis.com/kubernetes-helm/helm-v2.9.1-linux-amd64.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 2.开始安装</span><br><span class="line">tar -zxvf helm-2.9.0.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 3.移动到系统目录下</span><br><span class="line">mv helm-2.9.0/helm /usr/local/bin/helm</span><br></pre></td></tr></table></figure>
+<h3 id="2-Helm-服务端安装"><a href="#2-Helm-服务端安装" class="headerlink" title="2. Helm 服务端安装"></a>2. Helm 服务端安装</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 1.下载国内tiller镜像</span><br><span class="line">docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/tiller:v2.9.1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 2.为每个节点安装 socat</span><br><span class="line">yum install -y socat</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 3.使用Service Account安装</span><br><span class="line"><span class="meta">#</span># 1.创建一个名为tiller的Service Account</span><br><span class="line">kubectl create serviceaccount tiller --namespace kube-system</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span># 2.授予名为tiller的ServiceAccount集群管理员角色cluster-admin：</span><br><span class="line">vim helm-rbac-config.yaml</span><br><span class="line"><span class="meta">#</span>## 加入如下内容：</span><br><span class="line">apiVersion: rbac.authorization.k8s.io/v1beta1 </span><br><span class="line">kind: ClusterRoleBinding </span><br><span class="line">metadata: </span><br><span class="line">  name: tiller </span><br><span class="line">roleRef: </span><br><span class="line">  apiGroup: rbac.authorization.k8s.io </span><br><span class="line">  kind: ClusterRole </span><br><span class="line">  name: cluster-admin </span><br><span class="line">subjects: </span><br><span class="line">- kind: ServiceAccount </span><br><span class="line">  name: tiller </span><br><span class="line">  namespace: kube-system</span><br><span class="line">  </span><br><span class="line"><span class="meta">  #</span>## 授予tiller集群管理员角色：</span><br><span class="line">  kubectl create -f helm-rbac-config.yaml</span><br><span class="line"> </span><br><span class="line"><span class="meta"> #</span># 3.安装服务端（tiller）</span><br><span class="line"><span class="meta"> #</span>## 创建服务端</span><br><span class="line"> helm init --service-account tiller --upgrade -i registry.cn-hangzhou.aliyuncs.com/google_containers/tiller:v2.9.1  --stable-repo-url https://kubernetes.oss-cn-hangzhou.aliyuncs.com/charts</span><br><span class="line"> </span><br><span class="line"><span class="meta"> #</span>## 创建TLS认证服务端，参考地址：https://github.com/gjmzj/kubeasz/blob/master/docs/guide/helm.md</span><br><span class="line"> helm init --service-account tiller --upgrade -i registry.cn-hangzhou.aliyuncs.com/google_containers/tiller:v2.9.1 --tiller-tls-cert /etc/kubernetes/ssl/tiller001.pem --tiller-tls-key /etc/kubernetes/ssl/tiller001-key.pem --tls-ca-cert /etc/kubernetes/ssl/ca.pem --tiller-namespace kube-system --stable-repo-url https://kubernetes.oss-cn-hangzhou.aliyuncs.com/charts</span><br></pre></td></tr></table></figure>
+<h3 id="4-验证"><a href="#4-验证" class="headerlink" title="4. 验证"></a>4. 验证</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">helm version</span><br><span class="line"><span class="meta">#</span>## 结果：</span><br><span class="line">Client: &amp;version.Version&#123;SemVer:"v2.9.1", GitCommit:"20adb27c7c5868466912eebdf6664e7390ebe710", GitTreeState:"clean"&#125;</span><br><span class="line">Server: &amp;version.Version&#123;SemVer:"v2.9.1", GitCommit:"20adb27c7c5868466912eebdf6664e7390ebe710", GitTreeState:"clean"&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="5-Helm使用"><a href="#5-Helm使用" class="headerlink" title="5. Helm使用"></a>5. Helm使用</h3><h4 id="5-1-更换仓库"><a href="#5-1-更换仓库" class="headerlink" title="5.1. 更换仓库"></a>5.1. 更换仓库</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 1.移除原来的仓库</span><br><span class="line">helm repo remove stable</span><br><span class="line"><span class="meta">#</span> 2.添加新仓库</span><br><span class="line">helm repo add stable https://kubernetes.oss-cn-hangzhou.aliyuncs.com/charts</span><br><span class="line"><span class="meta">#</span> 3.更新仓库</span><br><span class="line">helm repo update</span><br></pre></td></tr></table></figure>
+<h4 id="5-2-查看仓库中charts"><a href="#5-2-查看仓库中charts" class="headerlink" title="5.2. 查看仓库中charts"></a>5.2. 查看仓库中charts</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm search</span><br></pre></td></tr></table></figure>
+<h4 id="5-3-更新charts列表"><a href="#5-3-更新charts列表" class="headerlink" title="5.3. 更新charts列表"></a>5.3. 更新charts列表</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm repo update</span><br></pre></td></tr></table></figure>
+<h4 id="5-4-安装charts"><a href="#5-4-安装charts" class="headerlink" title="5.4.安装charts"></a>5.4.安装charts</h4><p>Monocular是一个开源软件，用于管理kubernetes上以Helm Charts形式创建的服务，可以通过它的web页面来安装helm Charts</p>
+<h5 id="5-4-1-安装Nginx-Ingress-controller，安装的k8s集群启用了RBAC，则一定要加rbac-create-true参数"><a href="#5-4-1-安装Nginx-Ingress-controller，安装的k8s集群启用了RBAC，则一定要加rbac-create-true参数" class="headerlink" title="5.4.1 安装Nginx Ingress controller，安装的k8s集群启用了RBAC，则一定要加rbac.create=true参数"></a>5.4.1 安装Nginx Ingress controller，安装的k8s集群启用了RBAC，则一定要加rbac.create=true参数</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm install stable/nginx-ingress --set controller.hostNetwork=true，rbac.create=true</span><br></pre></td></tr></table></figure>
+<h5 id="5-4-2-安装Monocular"><a href="#5-4-2-安装Monocular" class="headerlink" title="5.4.2 安装Monocular"></a>5.4.2 安装Monocular</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 1.添加新的源</span><br><span class="line">helm repo add monocular https://kubernetes-helm.github.io/monocular</span><br><span class="line"><span class="meta">#</span> 2.安装</span><br><span class="line">helm install monocular/monocular -f custom-repos.yaml</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> custom-repos.yaml 内容</span><br><span class="line">cat custom-repos.yaml</span><br><span class="line"></span><br><span class="line">api:</span><br><span class="line">  config:</span><br><span class="line">    repos:</span><br><span class="line">      - name: stable</span><br><span class="line">        url: https://aliacs-app-catalog.oss-cn-hangzhou.aliyuncs.com/charts</span><br><span class="line">        source: https://github.com/kubernetes/charts/tree/master/stable</span><br><span class="line">      - name: incubator</span><br><span class="line">        url: https://aliacs-app-catalog.oss-cn-hangzhou.aliyuncs.com/charts-incubator</span><br><span class="line">        source: https://github.com/kubernetes/charts/tree/master/incubator</span><br><span class="line">      - name: monocular</span><br><span class="line">        url: https://kubernetes-helm.github.io/monocular</span><br><span class="line">        source: https://github.com/kubernetes-helm/monocular/tree/master/charts</span><br></pre></td></tr></table></figure>
+<h5 id="5-4-3-查看需要安装的values"><a href="#5-4-3-查看需要安装的values" class="headerlink" title="5.4.3 查看需要安装的values"></a>5.4.3 查看需要安装的values</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm inspect values &#123;chart名&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="5-5-查看K8S中已安装的charts"><a href="#5-5-查看K8S中已安装的charts" class="headerlink" title="5.5 查看K8S中已安装的charts"></a>5.5 查看K8S中已安装的charts</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm list</span><br></pre></td></tr></table></figure>
+<h4 id="5-6-删除安装的charts"><a href="#5-6-删除安装的charts" class="headerlink" title="5.6 删除安装的charts"></a>5.6 删除安装的charts</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 删除：helm delete xxx</span><br></pre></td></tr></table></figure>
+<h3 id="6-卸载Helm服务端"><a href="#6-卸载Helm服务端" class="headerlink" title="6. 卸载Helm服务端"></a>6. 卸载Helm服务端</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm reset 或 helm reset --force</span><br></pre></td></tr></table></figure>
+<h3 id="7-参考地址："><a href="#7-参考地址：" class="headerlink" title="7. 参考地址："></a>7. 参考地址：</h3><blockquote>
+<p>1.<a href="https://github.com/gjmzj/kubeasz/blob/master/docs/guide/helm.md" target="_blank" rel="noopener">https://github.com/gjmzj/kubeasz/blob/master/docs/guide/helm.md</a><br>2.<a href="https://blog.csdn.net/wenwenxiong/article/details/79067054" target="_blank" rel="noopener">https://blog.csdn.net/wenwenxiong/article/details/79067054</a><br>3.<a href="https://blog.csdn.net/luanpeng825485697/article/details/80873236" target="_blank" rel="noopener">https://blog.csdn.net/luanpeng825485697/article/details/80873236</a><br>4.<a href="https://blog.csdn.net/qq_35959573/article/details/80885052" target="_blank" rel="noopener">https://blog.csdn.net/qq_35959573/article/details/80885052</a></p>
+</blockquote>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2018-09-13T02:47:48.971Z" itemprop="dateUpdated">2018-09-13 10:47:48</time>
+</span><br>
+
+
+        
+        <p style="font-size:16px;">欢迎大家去 <a href="https://githink.cn" target="_blank" style="color:red;">信客</a> 社区注册互动，那里是黑客和健身热爱者的聚集地，那里有你需要的一切。</p><br/>本文首发于 毛子坤的博客（ http://blog.githink.cn ），版权所有，侵权必究。
+        
+    </div>
+    <footer>
+        <a href="http://blog.githink.cn">
+            <img src="/img/avatar.png" alt="信客">
+            信客
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/helm/">helm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/k8s/">k8s</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kubernetes/">kubernetes</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/容器/">容器</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://blog.githink.cn/2018/09/13/kubernetes-安装-helm/&title=《kubernetes 安装 helm》 — 信客博客&pic=http://blog.githink.cn/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://blog.githink.cn/2018/09/13/kubernetes-安装-helm/&title=《kubernetes 安装 helm》 — 信客博客&source=健身 IT Nginx FFmpeg Fitness Java WeChat Android Web Html Video Js Css Ps" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://blog.githink.cn/2018/09/13/kubernetes-安装-helm/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《kubernetes 安装 helm》 — 信客博客&url=http://blog.githink.cn/2018/09/13/kubernetes-安装-helm/&via=http://blog.githink.cn" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://blog.githink.cn/2018/09/13/kubernetes-安装-helm/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/09/13/Centos-7-搭建-Docker-私服/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Centos 7 搭建 Docker 私服</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=2142826"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        对你有帮助就赞助一下吧~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>信客 &copy; 2017 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://blog.githink.cn/2018/09/13/kubernetes-安装-helm/&title=《kubernetes 安装 helm》 — 信客博客&pic=http://blog.githink.cn/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://blog.githink.cn/2018/09/13/kubernetes-安装-helm/&title=《kubernetes 安装 helm》 — 信客博客&source=健身 IT Nginx FFmpeg Fitness Java WeChat Android Web Html Video Js Css Ps" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://blog.githink.cn/2018/09/13/kubernetes-安装-helm/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《kubernetes 安装 helm》 — 信客博客&url=http://blog.githink.cn/2018/09/13/kubernetes-安装-helm/&via=http://blog.githink.cn" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://blog.githink.cn/2018/09/13/kubernetes-安装-helm/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACIklEQVR42u3a3a6CQAxFYd//pTE5twZcux310FlzRRSBD5Nm+vN44HX8retj/u311V5/tWzJkCHjtozjcp2dk16TYMjnp88gQ4aMDRgkyJJwyUN255oyZMiQkV6OhFcOkCFDhozvMMj5tTRYhgwZOzPS7RpPZXnY/VIuLkOGjBsyVjUGPnH8g/6GDBky/hnjCFdKJWH6aC8ZMmTMZvCiP2lPplTyOUmDZciQsQ+DFL9qhTM+tNFqZMqQIWM0o5YnpgMWBP+JATUZMmRMYtR+1nlbaRMC/QMyZMgYx0hbiWkLgSSfaXNUhgwZOzNWNSw7D82PT/sbMmTIGMfoF7DStiUp5/GgL0OGjH0YnRGHzkAGfzUooZUhQ8ZmjLTo3xkmq20KUcCVIUPGOAYJaquoaXkOJckyZMgYyiiGtkbqW2sDoKqhDBkyRjN4iZ9c9DqA1loCbzavMmTIGM3opKDpYAQv1bV6GjJkyBjNII/LN3adRJcPWJzm4jJkyBjE6JTV0t92GpxvSnUyZMjYhtFpTPY3fPyh41xchgwZN2fULsFJfPXHMmTIkDGVcYTr+sZp+O6X4WTIkLEDoxMQa4U2vrlMk2cZMmTMZpAgm57DXw0PuAs6sTJkyLg5o9ZcTJsB5F41vAwZMmTwEBxMeeC7oLKgDBkyZJSGKtKQzR9dhgwZezLSBDUt3Kepbzz2IUOGjNGMZZMa7W9JmC4CZMiQcVfGE0WAPOJ6R1VgAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
