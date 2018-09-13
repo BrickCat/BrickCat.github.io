@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>k8s高可用集群V1.11.1安装记录 | 信客博客 | githink.cn</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="kubernetes,docker,容器,k8s">
+    <meta name="description" content="实验环境   hostname IP 内存 职责     k8s-vip 192.168.1.110 —— VIP（虚拟IP）   k8s-master1 192.168.1.111 4G Master,Keepalived,HAProxy   k8s-master2 192.168.1.112 4G Master,Keepalived,HAProxy   k8s-master3 192.168.">
+<meta name="keywords" content="kubernetes,docker,容器,k8s">
+<meta property="og:type" content="article">
+<meta property="og:title" content="k8s高可用集群V1.11.1安装记录">
+<meta property="og:url" content="http://blog.githink.cn/2018/09/13/k8s高可用集群V1-11-1安装记录/index.html">
+<meta property="og:site_name" content="信客博客">
+<meta property="og:description" content="实验环境   hostname IP 内存 职责     k8s-vip 192.168.1.110 —— VIP（虚拟IP）   k8s-master1 192.168.1.111 4G Master,Keepalived,HAProxy   k8s-master2 192.168.1.112 4G Master,Keepalived,HAProxy   k8s-master3 192.168.">
+<meta property="og:locale" content="zh">
+<meta property="og:image" content="http://pdjjmqkea.bkt.clouddn.com/HA.png">
+<meta property="og:updated_time" content="2018-09-13T02:26:47.418Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="k8s高可用集群V1.11.1安装记录">
+<meta name="twitter:description" content="实验环境   hostname IP 内存 职责     k8s-vip 192.168.1.110 —— VIP（虚拟IP）   k8s-master1 192.168.1.111 4G Master,Keepalived,HAProxy   k8s-master2 192.168.1.112 4G Master,Keepalived,HAProxy   k8s-master3 192.168.">
+<meta name="twitter:image" content="http://pdjjmqkea.bkt.clouddn.com/HA.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="信客博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">信客</h5>
+          <a href="mailto:549595297@qq.com" title="549595297@qq.com" class="mail">549595297@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-server"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/githinkcn" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://code.githink.cn" target="_blank" >
+                <i class="icon icon-lg icon-paw"></i>
+                gogs
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">k8s高可用集群V1.11.1安装记录</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">k8s高可用集群V1.11.1安装记录</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-09-13T02:23:54.000Z" itemprop="datePublished" class="page-time">
+  2018-09-13
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/容器技术/">容器技术</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/容器技术/kubernetes/">kubernetes</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/容器技术/kubernetes/docker/">docker</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/容器技术/kubernetes/docker/k8s/">k8s</a></li></ul></li></ul></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#实验环境"><span class="post-toc-number">1.</span> <span class="post-toc-text">实验环境</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#环境准备"><span class="post-toc-number">2.</span> <span class="post-toc-text">环境准备</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#1-配置hosts信息（所有节点）"><span class="post-toc-number">2.0.1.</span> <span class="post-toc-text">1. 配置hosts信息（所有节点）</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#2-安装Docker-（所有节点）"><span class="post-toc-number">2.0.2.</span> <span class="post-toc-text">2. 安装Docker （所有节点）</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#3-在所有Master节点上输入以下环境变量，主机名和IP信息根据自己的实际的情况进行修改（-台Master节点）"><span class="post-toc-number">2.0.3.</span> <span class="post-toc-text">3. 在所有Master节点上输入以下环境变量，主机名和IP信息根据自己的实际的情况进行修改（#台Master节点）</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#4-关闭防火墙、关闭swap、关闭SELinux、调整内核参数-所有节点"><span class="post-toc-number">2.0.4.</span> <span class="post-toc-text">4. 关闭防火墙、关闭swap、关闭SELinux、调整内核参数(所有节点)</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#5-准备镜像（所有节点）"><span class="post-toc-number">2.0.5.</span> <span class="post-toc-text">5.准备镜像（所有节点）</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#6-安装、配置kubelet-（所有节点）"><span class="post-toc-number">2.0.6.</span> <span class="post-toc-text">6. 安装、配置kubelet （所有节点）</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#7-准备SSH-Keys（任意Master节点）"><span class="post-toc-number">2.0.7.</span> <span class="post-toc-text">7.准备SSH Keys（任意Master节点）</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#8-部署第一个keepalived-（第一个Master节点）"><span class="post-toc-number">2.0.8.</span> <span class="post-toc-text">8. 部署第一个keepalived （第一个Master节点）</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#9-部署第二个keepalived-（第二个Master节点）"><span class="post-toc-number">2.0.9.</span> <span class="post-toc-text">9. 部署第二个keepalived （第二个Master节点）</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#10-部署第三个keepalived-（第三个Master节点）"><span class="post-toc-number">2.0.10.</span> <span class="post-toc-text">10. 部署第三个keepalived （第三个Master节点）</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#11-部署HAProxy-（所有Master节点）"><span class="post-toc-number">2.0.11.</span> <span class="post-toc-text">11. 部署HAProxy （所有Master节点）</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安装kubernetes"><span class="post-toc-number">3.</span> <span class="post-toc-text">安装kubernetes</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#1-配置第一个Master节点（第一个Master节点）"><span class="post-toc-number">3.0.1.</span> <span class="post-toc-text">1. 配置第一个Master节点（第一个Master节点）</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#2-配置第二个Master节点（第二个Master节点）"><span class="post-toc-number">3.0.2.</span> <span class="post-toc-text">2. 配置第二个Master节点（第二个Master节点）</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#3-部署第三个Master节点-（第三个Master节点）"><span class="post-toc-number">3.0.3.</span> <span class="post-toc-text">3. 部署第三个Master节点 （第三个Master节点）</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#4-配置使用kubectl-在任意master节点操作"><span class="post-toc-number">3.0.4.</span> <span class="post-toc-text">4. 配置使用kubectl (在任意master节点操作)</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#5-配置网络插件-在任意master节点操作"><span class="post-toc-number">3.0.5.</span> <span class="post-toc-text">5. 配置网络插件 (在任意master节点操作)</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#6-子节点加入集群-（所有子节点）"><span class="post-toc-number">3.0.6.</span> <span class="post-toc-text">6. 子节点加入集群 （所有子节点）</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#7-查看节点状态"><span class="post-toc-number">3.0.7.</span> <span class="post-toc-text">7. 查看节点状态</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#8-配置k8s可视化"><span class="post-toc-number">3.0.8.</span> <span class="post-toc-text">8. 配置k8s可视化</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#9-访问集群"><span class="post-toc-number">3.0.9.</span> <span class="post-toc-text">9. 访问集群</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-k8s高可用集群V1-11-1安装记录"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">k8s高可用集群V1.11.1安装记录</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-09-13 10:23:54" datetime="2018-09-13T02:23:54.000Z"  itemprop="datePublished">2018-09-13</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/容器技术/">容器技术</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/容器技术/kubernetes/">kubernetes</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/容器技术/kubernetes/docker/">docker</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/容器技术/kubernetes/docker/k8s/">k8s</a></li></ul></li></ul></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="实验环境"><a href="#实验环境" class="headerlink" title="实验环境"></a>实验环境</h3><table>
+<thead>
+<tr>
+<th>hostname</th>
+<th>IP</th>
+<th>内存</th>
+<th>职责</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>k8s-vip</td>
+<td>192.168.1.110</td>
+<td>——</td>
+<td>VIP（虚拟IP）</td>
+</tr>
+<tr>
+<td>k8s-master1</td>
+<td>192.168.1.111</td>
+<td>4G</td>
+<td>Master,Keepalived,HAProxy</td>
+</tr>
+<tr>
+<td>k8s-master2</td>
+<td>192.168.1.112</td>
+<td>4G</td>
+<td>Master,Keepalived,HAProxy</td>
+</tr>
+<tr>
+<td>k8s-master3</td>
+<td>192.168.1.113</td>
+<td>4G</td>
+<td>Master,Keepalived,HAProxy</td>
+</tr>
+<tr>
+<td>k8s-slave1</td>
+<td>192.168.1.114</td>
+<td>4G</td>
+<td>Worker</td>
+</tr>
+<tr>
+<td>k8s-slave1</td>
+<td>192.168.1.115</td>
+<td>4G</td>
+<td>Worker</td>
+</tr>
+</tbody>
+</table>
+<a id="more"></a>
+<h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><h5 id="1-配置hosts信息（所有节点）"><a href="#1-配置hosts信息（所有节点）" class="headerlink" title="1. 配置hosts信息（所有节点）"></a>1. 配置hosts信息（所有节点）</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;&lt;EOF &gt;&gt; /etc/hosts</span><br><span class="line">192.168.1.110 k8s-vip</span><br><span class="line">192.168.1.111 k8s-master1</span><br><span class="line">192.168.1.112 k8s-master2</span><br><span class="line">192.168.1.113 k8s-master3</span><br><span class="line">192.168.1.114 k8s-slave1</span><br><span class="line">192.168.1.115 k8s-slave2</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+<h5 id="2-安装Docker-（所有节点）"><a href="#2-安装Docker-（所有节点）" class="headerlink" title="2. 安装Docker （所有节点）"></a>2. 安装Docker （所有节点）</h5><p>安装Docker，步骤略可参考<a href="http://www.ebanban.com/?p=496" target="_blank" rel="noopener">http://www.ebanban.com/?p=496</a></p>
+<h5 id="3-在所有Master节点上输入以下环境变量，主机名和IP信息根据自己的实际的情况进行修改（-台Master节点）"><a href="#3-在所有Master节点上输入以下环境变量，主机名和IP信息根据自己的实际的情况进行修改（-台Master节点）" class="headerlink" title="3. 在所有Master节点上输入以下环境变量，主机名和IP信息根据自己的实际的情况进行修改（#台Master节点）"></a>3. 在所有Master节点上输入以下环境变量，主机名和IP信息根据自己的实际的情况进行修改（#台Master节点）</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">export KUBECONFIG=/etc/kubernetes/admin.conf</span><br><span class="line">export LOAD_BALANCER_DNS=k8s-vip</span><br><span class="line">export LOAD_BALANCER_PORT=8443</span><br><span class="line">export CP0_HOSTNAME=k8s-master1</span><br><span class="line">export CP1_HOSTNAME=k8s-master2</span><br><span class="line">export CP2_HOSTNAME=k8s-master3</span><br><span class="line">export VIP_IP=192.168.1.110</span><br><span class="line">export CP0_IP=192.168.1.111</span><br><span class="line">export CP1_IP=192.168.1.112</span><br><span class="line">export CP2_IP=192.168.1.113</span><br></pre></td></tr></table></figure>
+<h5 id="4-关闭防火墙、关闭swap、关闭SELinux、调整内核参数-所有节点"><a href="#4-关闭防火墙、关闭swap、关闭SELinux、调整内核参数-所有节点" class="headerlink" title="4. 关闭防火墙、关闭swap、关闭SELinux、调整内核参数(所有节点)"></a>4. 关闭防火墙、关闭swap、关闭SELinux、调整内核参数(所有节点)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl stop firewalld</span><br><span class="line">sudo systemctl disable firewalld</span><br><span class="line">sudo swapoff -a</span><br><span class="line">sudo sed -i &apos;/ swap / s/^\(.*\)$/#\1/g&apos; /etc/fstab</span><br><span class="line">sudo setenforce 0</span><br><span class="line">sed -i &apos;s/SELINUX=permissive/SELINUX=disabled/&apos; /etc/sysconfig/selinux</span><br><span class="line">cat &lt;&lt;EOF &gt; /etc/sysctl.d/k8s.conf</span><br><span class="line">net.bridge.bridge-nf-call-ip6tables = 1</span><br><span class="line">net.bridge.bridge-nf-call-iptables = 1</span><br><span class="line">EOF</span><br><span class="line">sysctl --system</span><br></pre></td></tr></table></figure>
+<h5 id="5-准备镜像（所有节点）"><a href="#5-准备镜像（所有节点）" class="headerlink" title="5.准备镜像（所有节点）"></a>5.准备镜像（所有节点）</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># 创建脚本加入如下内容</span><br><span class="line">#!/bin/bash</span><br><span class="line">images=(kube-proxy-amd64:v1.11.1 kube-scheduler-amd64:v1.11.1 kube-controller-manager-amd64:v1.11.1 kube-apiserver-amd64:v1.11.1</span><br><span class="line">etcd-amd64:3.2.18 pause-amd64:3.1 kubernetes-dashboard-amd64:v1.8.3 k8s-dns-sidecar-amd64:1.14.9 k8s-dns-kube-dns-amd64:1.14.9</span><br><span class="line">k8s-dns-dnsmasq-nanny-amd64:1.14.9 )</span><br><span class="line">for imageName in $&#123;images[@]&#125; ; do</span><br><span class="line">docker pull mirrorgooglecontainers/$imageName</span><br><span class="line">docker tag mirrorgooglecontainers/$imageName k8s.gcr.io/$imageName</span><br><span class="line">docker rmi mirrorgooglecontainers/$imageName</span><br><span class="line">done</span><br><span class="line">docker tag da86e6ba6ca1 k8s.gcr.io/pause:3.1</span><br><span class="line">docker pull coredns/coredns:1.1.3</span><br><span class="line">docker tag coredns/coredns:1.1.3 k8s.gcr.io/coredns:1.1.3</span><br><span class="line">docker rmi coredns/coredns:1.1.3</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 添加运行权限</span><br><span class="line">chmod -R 777 ./xxx.sh</span><br><span class="line"></span><br><span class="line"># 执行脚本</span><br><span class="line">./xxx.sh</span><br></pre></td></tr></table></figure>
+<h5 id="6-安装、配置kubelet-（所有节点）"><a href="#6-安装、配置kubelet-（所有节点）" class="headerlink" title="6. 安装、配置kubelet （所有节点）"></a>6. 安装、配置kubelet （所有节点）</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;&lt;EOF &gt; /etc/yum.repos.d/kubernetes.repo</span><br><span class="line">[kubernetes]</span><br><span class="line">name=Kubernetes</span><br><span class="line">baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64/</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=1</span><br><span class="line">repo_gpgcheck=1</span><br><span class="line">gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg</span><br><span class="line">EOF</span><br><span class="line">yum install -y kubelet-1.11.1 kubeadm-1.11.1 kubectl-1.11.1</span><br><span class="line">systemctl enable kubelet</span><br></pre></td></tr></table></figure>
+<h5 id="7-准备SSH-Keys（任意Master节点）"><a href="#7-准备SSH-Keys（任意Master节点）" class="headerlink" title="7.准备SSH Keys（任意Master节点）"></a>7.准备SSH Keys（任意Master节点）</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 生成SSH Key（通常在第一台Master上操作，可以在终端上操作）</span><br><span class="line">ssh-keygen -t rsa -b 2048 -f /root/.ssh/id_rsa -N &quot;&quot;</span><br><span class="line"></span><br><span class="line"># 将SSH Key复制给其他主机</span><br><span class="line">for host in &#123;$CP0_HOSTNAME,$CP1_HOSTNAME,$CP2_HOSTNAME&#125;; do ssh-copy-id $host; done $host; done</span><br></pre></td></tr></table></figure>
+<h5 id="8-部署第一个keepalived-（第一个Master节点）"><a href="#8-部署第一个keepalived-（第一个Master节点）" class="headerlink" title="8. 部署第一个keepalived （第一个Master节点）"></a>8. 部署第一个keepalived （第一个Master节点）</h5><p><strong>keepalived用于生产浮动的虚拟IP，并将浮动IP分配给优先级最高且haproxy正常运行的节点<br>在第一台Master上配置和启动keepalived，若网卡名称不为示例中的eth0则改为对应名称</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"># 安装 部署第一个keepalived</span><br><span class="line">yum install -y keepalived curl psmisc &amp;&amp; systemctl enable keepalived</span><br><span class="line"></span><br><span class="line"># 自定义配置</span><br><span class="line">cat &lt;&lt; EOF &gt; /etc/keepalived/keepalived.conf</span><br><span class="line">vrrp_script haproxy-check &#123;</span><br><span class="line">    script &quot;killall -0 haproxy&quot;</span><br><span class="line">    interval 2</span><br><span class="line">    weight 20</span><br><span class="line">&#125; </span><br><span class="line">vrrp_instance haproxy-vip &#123;</span><br><span class="line">    state BACKUP</span><br><span class="line">    priority 102</span><br><span class="line">    interface ens33</span><br><span class="line">    virtual_router_id 51</span><br><span class="line">    advert_int 3</span><br><span class="line">    unicast_src_ip $CP0_IP</span><br><span class="line">    unicast_peer &#123;</span><br><span class="line">        $CP1_IP</span><br><span class="line">        $CP2_IP</span><br><span class="line">    &#125;</span><br><span class="line">    virtual_ipaddress &#123;</span><br><span class="line">        $VIP_IP</span><br><span class="line">    &#125;</span><br><span class="line">    track_script &#123;</span><br><span class="line">        haproxy-check weight 20</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"># 启动 keepalived</span><br><span class="line">systemctl start keepalived</span><br></pre></td></tr></table></figure>
+<h5 id="9-部署第二个keepalived-（第二个Master节点）"><a href="#9-部署第二个keepalived-（第二个Master节点）" class="headerlink" title="9. 部署第二个keepalived （第二个Master节点）"></a>9. 部署第二个keepalived （第二个Master节点）</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"># 安装 部署第一个keepalived</span><br><span class="line">yum install -y keepalived curl psmisc &amp;&amp; systemctl enable keepalived</span><br><span class="line"></span><br><span class="line"># 自定义配置</span><br><span class="line">cat &lt;&lt; EOF &gt; /etc/keepalived/keepalived.conf</span><br><span class="line">vrrp_script haproxy-check &#123;</span><br><span class="line">    script &quot;killall -0 haproxy&quot;</span><br><span class="line">    interval 2</span><br><span class="line">    weight 20</span><br><span class="line">&#125;</span><br><span class="line">vrrp_instance haproxy-vip &#123;</span><br><span class="line">    state BACKUP</span><br><span class="line">    priority 101</span><br><span class="line">    interface ens33</span><br><span class="line">    virtual_router_id 51</span><br><span class="line">    advert_int 3</span><br><span class="line">    unicast_src_ip $CP1_IP</span><br><span class="line">    unicast_peer &#123;</span><br><span class="line">        $CP0_IP</span><br><span class="line">        $CP2_IP</span><br><span class="line">    &#125;</span><br><span class="line">    virtual_ipaddress &#123;</span><br><span class="line">        $VIP_IP</span><br><span class="line">    &#125;</span><br><span class="line">    track_script &#123;</span><br><span class="line">        haproxy-check weight 20</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"># 启动 keepalived</span><br><span class="line">systemctl start keepalived</span><br></pre></td></tr></table></figure>
+<h5 id="10-部署第三个keepalived-（第三个Master节点）"><a href="#10-部署第三个keepalived-（第三个Master节点）" class="headerlink" title="10. 部署第三个keepalived （第三个Master节点）"></a>10. 部署第三个keepalived （第三个Master节点）</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"># 安装 部署第一个keepalived</span><br><span class="line">yum install -y keepalived curl psmisc &amp;&amp; systemctl enable keepalived</span><br><span class="line"></span><br><span class="line"># 自定义配置</span><br><span class="line">cat &lt;&lt; EOF &gt; /etc/keepalived/keepalived.conf</span><br><span class="line">vrrp_script haproxy-check &#123;</span><br><span class="line">    script &quot;killall -0 haproxy&quot;</span><br><span class="line">    interval 2</span><br><span class="line">    weight 20</span><br><span class="line">&#125;</span><br><span class="line">vrrp_instance haproxy-vip &#123;</span><br><span class="line">    state BACKUP</span><br><span class="line">    priority 100</span><br><span class="line">    interface ens33</span><br><span class="line">    virtual_router_id 51</span><br><span class="line">    advert_int 3</span><br><span class="line">    unicast_src_ip $CP2_IP</span><br><span class="line">    unicast_peer &#123;</span><br><span class="line">        $CP0_IP</span><br><span class="line">        $CP1_IP</span><br><span class="line">    &#125;</span><br><span class="line">    virtual_ipaddress &#123;</span><br><span class="line">        $VIP_IP</span><br><span class="line">    &#125;</span><br><span class="line">    track_script &#123;</span><br><span class="line">        haproxy-check weight 20</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"># 启动 keepalived</span><br><span class="line">systemctl start keepalived</span><br></pre></td></tr></table></figure>
+<h5 id="11-部署HAProxy-（所有Master节点）"><a href="#11-部署HAProxy-（所有Master节点）" class="headerlink" title="11. 部署HAProxy （所有Master节点）"></a>11. 部署HAProxy （所有Master节点）</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"># 安装HAproxy</span><br><span class="line">yum install -y haproxy &amp;&amp; systemctl enable haproxy</span><br><span class="line"></span><br><span class="line"># 自定义配置文件</span><br><span class="line">cat &lt;&lt; EOF &gt; /etc/haproxy/haproxy.cfg</span><br><span class="line">global</span><br><span class="line">  log 127.0.0.1 local0</span><br><span class="line">  log 127.0.0.1 local1 notice</span><br><span class="line">  tune.ssl.default-dh-param 2048</span><br><span class="line"></span><br><span class="line">defaults</span><br><span class="line">  log global</span><br><span class="line">  mode http</span><br><span class="line">  option dontlognull</span><br><span class="line">  timeout connect 5000ms</span><br><span class="line">  timeout client  600000ms</span><br><span class="line">  timeout server  600000ms</span><br><span class="line"></span><br><span class="line">listen stats</span><br><span class="line">    bind :9090</span><br><span class="line">    mode http</span><br><span class="line">    balance</span><br><span class="line">    stats uri /haproxy_stats</span><br><span class="line">    stats auth admin:admin</span><br><span class="line">    stats admin if TRUE</span><br><span class="line"></span><br><span class="line">frontend kube-apiserver-https</span><br><span class="line">   mode tcp</span><br><span class="line">   bind :8443</span><br><span class="line">   default_backend kube-apiserver-backend</span><br><span class="line"></span><br><span class="line">backend kube-apiserver-backend</span><br><span class="line">    mode tcp</span><br><span class="line">    balance roundrobin</span><br><span class="line">    stick-table type ip size 200k expire 30m</span><br><span class="line">    stick on src</span><br><span class="line">    server k8s-master1 192.168.1.111:6443 check</span><br><span class="line">    server k8s-master2 192.168.1.112:6443 check</span><br><span class="line">    server k8s-master3 192.168.1.113:6443 check</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"># 启动 HAproxy</span><br><span class="line">systemctl start haproxy</span><br></pre></td></tr></table></figure>
+<h3 id="安装kubernetes"><a href="#安装kubernetes" class="headerlink" title="安装kubernetes"></a>安装kubernetes</h3><h5 id="1-配置第一个Master节点（第一个Master节点）"><a href="#1-配置第一个Master节点（第一个Master节点）" class="headerlink" title="1. 配置第一个Master节点（第一个Master节点）"></a>1. 配置第一个Master节点（第一个Master节点）</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">cat &gt;kubeadm-master.config&lt;&lt;EOF</span><br><span class="line">apiVersion: kubeadm.k8s.io/v1alpha2</span><br><span class="line">kind: MasterConfiguration</span><br><span class="line">kubernetesVersion: v1.11.1</span><br><span class="line"></span><br><span class="line">apiServerCertSANs:</span><br><span class="line">- &quot;k8s-master1&quot;</span><br><span class="line">- &quot;k8s-master2&quot;</span><br><span class="line">- &quot;k8s-master3&quot;</span><br><span class="line">- &quot;192.168.1.111&quot;</span><br><span class="line">- &quot;192.168.1.112&quot;</span><br><span class="line">- &quot;192.168.1.113&quot;</span><br><span class="line">- &quot;192.168.1.110&quot;</span><br><span class="line">- &quot;127.0.0.1&quot;</span><br><span class="line"></span><br><span class="line">api:</span><br><span class="line">  advertiseAddress: $CP0_IP</span><br><span class="line">  controlPlaneEndpoint: 192.168.1.110:8443</span><br><span class="line"></span><br><span class="line">etcd:</span><br><span class="line">  local:</span><br><span class="line">    extraArgs:</span><br><span class="line">      listen-client-urls: &quot;https://127.0.0.1:2379,https://$CP0_IP:2379&quot;</span><br><span class="line">      advertise-client-urls: &quot;https://$CP0_IP:2379&quot;</span><br><span class="line">      listen-peer-urls: &quot;https://$CP0_IP:2380&quot;</span><br><span class="line">      initial-advertise-peer-urls: &quot;https://$CP0_IP:2380&quot;</span><br><span class="line">      initial-cluster: &quot;$CP0_HOSTNAME=https://$CP0_IP:2380&quot;</span><br><span class="line">    serverCertSANs:</span><br><span class="line">      - $CP0_HOSTNAME</span><br><span class="line">      - $CP0_IP</span><br><span class="line">    peerCertSANs:</span><br><span class="line">      - $CP0_HOSTNAME</span><br><span class="line">      - $CP0_IP</span><br><span class="line"></span><br><span class="line">controllerManagerExtraArgs:</span><br><span class="line">  node-monitor-grace-period: 10s</span><br><span class="line">  pod-eviction-timeout: 10s</span><br><span class="line"></span><br><span class="line">networking:</span><br><span class="line">  podSubnet: 10.244.0.0/16</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"># 初始化</span><br><span class="line"># 注意保存返回的 join 命令</span><br><span class="line">kubeadm init --config kubeadm-master.config</span><br><span class="line"></span><br><span class="line"># 打包ca相关文件上传至其他master节点</span><br><span class="line">cd /etc/kubernetes &amp;&amp; tar cvzf k8s-key.tgz admin.conf pki/ca.* pki/sa.* pki/front-proxy-ca.* pki/etcd/ca.*</span><br><span class="line"></span><br><span class="line">scp k8s-key.tgz k8s-master2:~/</span><br><span class="line">scp k8s-key.tgz k8s-master3:~/</span><br><span class="line">ssh k8s-master2 &apos;tar xf k8s-key.tgz -C /etc/kubernetes/&apos;</span><br><span class="line">ssh k8s-master3 &apos;tar xf k8s-key.tgz -C /etc/kubernetes/&apos;</span><br></pre></td></tr></table></figure>
+<h5 id="2-配置第二个Master节点（第二个Master节点）"><a href="#2-配置第二个Master节点（第二个Master节点）" class="headerlink" title="2. 配置第二个Master节点（第二个Master节点）"></a>2. 配置第二个Master节点（第二个Master节点）</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">cat &gt;kubeadm-master.config&lt;&lt;EOF</span><br><span class="line">apiVersion: kubeadm.k8s.io/v1alpha2</span><br><span class="line">kind: MasterConfiguration</span><br><span class="line">kubernetesVersion: v1.11.1</span><br><span class="line"></span><br><span class="line">apiServerCertSANs:</span><br><span class="line">- &quot;k8s-master1&quot;</span><br><span class="line">- &quot;k8s-master2&quot;</span><br><span class="line">- &quot;k8s-master3&quot;</span><br><span class="line">- &quot;192.168.1.111&quot;</span><br><span class="line">- &quot;192.168.1.112&quot;</span><br><span class="line">- &quot;192.168.1.113&quot;</span><br><span class="line">- &quot;192.168.1.110&quot;</span><br><span class="line">- &quot;127.0.0.1&quot;</span><br><span class="line"></span><br><span class="line">api:</span><br><span class="line">  advertiseAddress: $CP1_IP</span><br><span class="line">  controlPlaneEndpoint: 192.168.1.110:8443</span><br><span class="line"></span><br><span class="line">etcd:</span><br><span class="line">  local:</span><br><span class="line">    extraArgs:</span><br><span class="line">      listen-client-urls: &quot;https://127.0.0.1:2379,https://$CP1_IP:2379&quot;</span><br><span class="line">      advertise-client-urls: &quot;https://$CP1_IP:2379&quot;</span><br><span class="line">      listen-peer-urls: &quot;https://$CP1_IP:2380&quot;</span><br><span class="line">      initial-advertise-peer-urls: &quot;https://$CP1_IP:2380&quot;</span><br><span class="line">      initial-cluster: &quot;$CP0_HOSTNAME=https://$CP0_IP:2380,$CP1_HOSTNAME=https://$CP1_IP:2380&quot;</span><br><span class="line">      initial-cluster-state: existing</span><br><span class="line">    serverCertSANs:</span><br><span class="line">      - $CP1_HOSTNAME</span><br><span class="line">      - $CP1_IP</span><br><span class="line">    peerCertSANs:</span><br><span class="line">      - $CP1_HOSTNAME</span><br><span class="line">      - $CP1_IP</span><br><span class="line"></span><br><span class="line">controllerManagerExtraArgs:</span><br><span class="line">  node-monitor-grace-period: 10s</span><br><span class="line">  pod-eviction-timeout: 10s</span><br><span class="line"></span><br><span class="line">networking:</span><br><span class="line">  podSubnet: 10.244.0.0/16</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"># 配置kubelet</span><br><span class="line">kubeadm alpha phase certs all --config kubeadm-master.config</span><br><span class="line">kubeadm alpha phase kubelet config write-to-disk --config kubeadm-master.config</span><br><span class="line">kubeadm alpha phase kubelet write-env-file --config kubeadm-master.config</span><br><span class="line">kubeadm alpha phase kubeconfig kubelet --config kubeadm-master.config</span><br><span class="line">systemctl restart kubelet</span><br><span class="line"></span><br><span class="line"># 添加etcd到集群中</span><br><span class="line">KUBECONFIG=/etc/kubernetes/admin.conf kubectl exec -n kube-system etcd-$&#123;CP0_HOSTNAME&#125; -- etcdctl --ca-file /etc/kubernetes/pki/etcd/ca.crt --cert-file /etc/kubernetes/pki/etcd/peer.crt --key-file /etc/kubernetes/pki/etcd/peer.key --endpoints=https://$&#123;CP0_IP&#125;:2379 member add $&#123;CP1_HOSTNAME&#125; https://$&#123;CP1_IP&#125;:2380</span><br><span class="line">kubeadm alpha phase etcd local --config kubeadm-master.config</span><br><span class="line"></span><br><span class="line"># 部署</span><br><span class="line">kubeadm alpha phase kubeconfig all --config kubeadm-master.config</span><br><span class="line">kubeadm alpha phase controlplane all --config kubeadm-master.config</span><br><span class="line">kubeadm alpha phase mark-master --config kubeadm-master.config</span><br></pre></td></tr></table></figure>
+<h5 id="3-部署第三个Master节点-（第三个Master节点）"><a href="#3-部署第三个Master节点-（第三个Master节点）" class="headerlink" title="3. 部署第三个Master节点 （第三个Master节点）"></a>3. 部署第三个Master节点 （第三个Master节点）</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">cat &gt;kubeadm-master.config&lt;&lt;EOF</span><br><span class="line">apiVersion: kubeadm.k8s.io/v1alpha2</span><br><span class="line">kind: MasterConfiguration</span><br><span class="line">kubernetesVersion: v1.11.1</span><br><span class="line"></span><br><span class="line">apiServerCertSANs:</span><br><span class="line">- &quot;k8s-master1&quot;</span><br><span class="line">- &quot;k8s-master2&quot;</span><br><span class="line">- &quot;k8s-master3&quot;</span><br><span class="line">- &quot;192.168.1.111&quot;</span><br><span class="line">- &quot;192.168.1.112&quot;</span><br><span class="line">- &quot;192.168.1.113&quot;</span><br><span class="line">- &quot;192.168.1.110&quot;</span><br><span class="line">- &quot;127.0.0.1&quot;</span><br><span class="line"></span><br><span class="line">api:</span><br><span class="line">  advertiseAddress: $CP2_IP</span><br><span class="line">  controlPlaneEndpoint: 192.168.1.110:8443</span><br><span class="line"></span><br><span class="line">etcd:</span><br><span class="line">  local:</span><br><span class="line">    extraArgs:</span><br><span class="line">      listen-client-urls: &quot;https://127.0.0.1:2379,https://$CP2_IP:2379&quot;</span><br><span class="line">      advertise-client-urls: &quot;https://$CP2_IP:2379&quot;</span><br><span class="line">      listen-peer-urls: &quot;https://$CP2_IP:2380&quot;</span><br><span class="line">      initial-advertise-peer-urls: &quot;https://$CP2_IP:2380&quot;</span><br><span class="line">      initial-cluster: &quot;$CP0_HOSTNAME=https://$CP0_IP:2380,$CP1_HOSTNAME=https://$CP1_IP:2380,$CP2_HOSTNAME=https://$CP2_IP:2380&quot;</span><br><span class="line">      initial-cluster-state: existing</span><br><span class="line">    serverCertSANs:</span><br><span class="line">      - $CP2_HOSTNAME</span><br><span class="line">      - $CP2_IP</span><br><span class="line">    peerCertSANs:</span><br><span class="line">      - $CP2_HOSTNAME</span><br><span class="line">      - $CP2_IP</span><br><span class="line"></span><br><span class="line">controllerManagerExtraArgs:</span><br><span class="line">  node-monitor-grace-period: 10s</span><br><span class="line">  pod-eviction-timeout: 10s</span><br><span class="line"></span><br><span class="line">networking:</span><br><span class="line">  podSubnet: 10.244.0.0/16</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"># 配置kubelet</span><br><span class="line">kubeadm alpha phase certs all --config kubeadm-master.config</span><br><span class="line">kubeadm alpha phase kubelet config write-to-disk --config kubeadm-master.config</span><br><span class="line">kubeadm alpha phase kubelet write-env-file --config kubeadm-master.config</span><br><span class="line">kubeadm alpha phase kubeconfig kubelet --config kubeadm-master.config</span><br><span class="line">systemctl restart kubelet</span><br><span class="line"></span><br><span class="line"># 添加etcd到集群中</span><br><span class="line">KUBECONFIG=/etc/kubernetes/admin.conf kubectl exec -n kube-system etcd-$&#123;CP0_HOSTNAME&#125; -- etcdctl --ca-file /etc/kubernetes/pki/etcd/ca.crt --cert-file /etc/kubernetes/pki/etcd/peer.crt --key-file /etc/kubernetes/pki/etcd/peer.key --endpoints=https://$&#123;CP0_IP&#125;:2379 member add $&#123;CP2_HOSTNAME&#125; https://$&#123;CP2_IP&#125;:2380</span><br><span class="line">kubeadm alpha phase etcd local --config kubeadm-master.config</span><br><span class="line"></span><br><span class="line"># 部署</span><br><span class="line">kubeadm alpha phase kubeconfig all --config kubeadm-master.config</span><br><span class="line">kubeadm alpha phase controlplane all --config kubeadm-master.config</span><br><span class="line">kubeadm alpha phase mark-master --config kubeadm-master.config</span><br></pre></td></tr></table></figure>
+<h5 id="4-配置使用kubectl-在任意master节点操作"><a href="#4-配置使用kubectl-在任意master节点操作" class="headerlink" title="4. 配置使用kubectl (在任意master节点操作)"></a>4. 配置使用kubectl (在任意master节点操作)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">rm -rf $HOME/.kube</span><br><span class="line">mkdir -p $HOME/.kube</span><br><span class="line">sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config</span><br><span class="line">sudo chown $(id -u):$(id -g) $HOME/.kube/config</span><br><span class="line"></span><br><span class="line"># 查看node节点</span><br><span class="line">kubectl get nodes</span><br><span class="line"></span><br><span class="line"># 只有网络插件也安装配置完成之后，才能会显示为ready状态</span><br><span class="line"># 设置master允许部署应用pod，参与工作负载，现在可以部署其他系统组件</span><br><span class="line"># 如 dashboard, heapster, efk等</span><br><span class="line">kubectl taint nodes --all node-role.kubernetes.io/master-</span><br></pre></td></tr></table></figure>
+<h5 id="5-配置网络插件-在任意master节点操作"><a href="#5-配置网络插件-在任意master节点操作" class="headerlink" title="5. 配置网络插件 (在任意master节点操作)"></a>5. 配置网络插件 (在任意master节点操作)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl -O https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml</span><br><span class="line"></span><br><span class="line">kubectl apply -f kube-flannel.yml</span><br></pre></td></tr></table></figure>
+<h5 id="6-子节点加入集群-（所有子节点）"><a href="#6-子节点加入集群-（所有子节点）" class="headerlink" title="6. 子节点加入集群 （所有子节点）"></a>6. 子节点加入集群 （所有子节点）</h5><p>就是你初始化第一个master保存的命令。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubeadm join k8s.test.local:8443 --token bqnani.kwxe3y34vy22xnhm --discovery-token-ca-cert-hash sha256:b6146fea7a63d3a66e406c12f55f8d99537db99880409939e4aba206300e06cc</span><br></pre></td></tr></table></figure></p>
+<h5 id="7-查看节点状态"><a href="#7-查看节点状态" class="headerlink" title="7. 查看节点状态"></a>7. 查看节点状态</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get nodes</span><br></pre></td></tr></table></figure>
+<p>返回如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">NAME          STATUS    ROLES     AGE       VERSION</span><br><span class="line">k8s-master1   Ready     master    49m       v1.11.1</span><br><span class="line">k8s-master2   Ready     master    47m       v1.11.1</span><br><span class="line">k8s-master3   Ready     master    45m       v1.11.1</span><br><span class="line">k8s-slave1    Ready     &lt;none&gt;    42m       v1.11.1</span><br><span class="line">k8s-slave2    Ready     &lt;none&gt;    42m       v1.11.1</span><br></pre></td></tr></table></figure></p>
+<h5 id="8-配置k8s可视化"><a href="#8-配置k8s可视化" class="headerlink" title="8. 配置k8s可视化"></a>8. 配置k8s可视化</h5><p>没有Git请自行安装。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># clone 配置文件</span><br><span class="line">git clone https://github.com/BrickCat/kubernetes-dashboard.git</span><br><span class="line"></span><br><span class="line"># 执行文件</span><br><span class="line">cd kubernetes-dashboard</span><br><span class="line"></span><br><span class="line">kubectl  -n kube-system create -f .</span><br></pre></td></tr></table></figure>
+<p>配置角色文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim dashboard-admin.yaml</span><br></pre></td></tr></table></figure></p>
+<p>添加如下内容：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: rbac.authorization.k8s.io/v1beta1</span><br><span class="line">kind: ClusterRoleBinding</span><br><span class="line">metadata:</span><br><span class="line">  name: kubernetes-dashboard</span><br><span class="line">  labels:</span><br><span class="line">    k8s-app: kubernetes-dashboard</span><br><span class="line">roleRef:</span><br><span class="line">  apiGroup: rbac.authorization.k8s.io</span><br><span class="line">  kind: ClusterRole</span><br><span class="line">  name: cluster-admin</span><br><span class="line">subjects:</span><br><span class="line">- kind: ServiceAccount</span><br><span class="line">  name: kubernetes-dashboard</span><br><span class="line">  namespace: kube-system</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl -f ./dashboard-admin.yaml create</span><br></pre></td></tr></table></figure>
+<h5 id="9-访问集群"><a href="#9-访问集群" class="headerlink" title="9. 访问集群"></a>9. 访问集群</h5><p> <a href="http://192.168.1.111:30090" target="_blank" rel="noopener">http://192.168.1.111:30090</a></p>
+<p> <img src="http://pdjjmqkea.bkt.clouddn.com/HA.png" alt=""></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2018-09-13T02:26:47.418Z" itemprop="dateUpdated">2018-09-13 10:26:47</time>
+</span><br>
+
+
+        
+        <p style="font-size:16px;">欢迎大家去 <a href="https://githink.cn" target="_blank" style="color:red;">信客</a> 社区注册互动，那里是黑客和健身热爱者的聚集地，那里有你需要的一切。</p><br/>本文首发于 毛子坤的博客（ http://blog.githink.cn ），版权所有，侵权必究。
+        
+    </div>
+    <footer>
+        <a href="http://blog.githink.cn">
+            <img src="/img/avatar.png" alt="信客">
+            信客
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/k8s/">k8s</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kubernetes/">kubernetes</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/容器/">容器</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://blog.githink.cn/2018/09/13/k8s高可用集群V1-11-1安装记录/&title=《k8s高可用集群V1.11.1安装记录》 — 信客博客&pic=http://blog.githink.cn/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://blog.githink.cn/2018/09/13/k8s高可用集群V1-11-1安装记录/&title=《k8s高可用集群V1.11.1安装记录》 — 信客博客&source=实验环境
+
+
+hostname
+IP
+内存
+职责
+
+
+
+
+k8s-vip
+192.168.1.110
+——
+VIP（虚拟IP）
+
+
+k8s-master1..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://blog.githink.cn/2018/09/13/k8s高可用集群V1-11-1安装记录/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《k8s高可用集群V1.11.1安装记录》 — 信客博客&url=http://blog.githink.cn/2018/09/13/k8s高可用集群V1-11-1安装记录/&via=http://blog.githink.cn" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://blog.githink.cn/2018/09/13/k8s高可用集群V1-11-1安装记录/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/02/09/Spring-cloud-config-server-使用本地配置文件/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Spring cloud config server 使用本地配置文件</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=2142826"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        对你有帮助就赞助一下吧~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>信客 &copy; 2017 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://blog.githink.cn/2018/09/13/k8s高可用集群V1-11-1安装记录/&title=《k8s高可用集群V1.11.1安装记录》 — 信客博客&pic=http://blog.githink.cn/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://blog.githink.cn/2018/09/13/k8s高可用集群V1-11-1安装记录/&title=《k8s高可用集群V1.11.1安装记录》 — 信客博客&source=实验环境
+
+
+hostname
+IP
+内存
+职责
+
+
+
+
+k8s-vip
+192.168.1.110
+——
+VIP（虚拟IP）
+
+
+k8s-master1..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://blog.githink.cn/2018/09/13/k8s高可用集群V1-11-1安装记录/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《k8s高可用集群V1.11.1安装记录》 — 信客博客&url=http://blog.githink.cn/2018/09/13/k8s高可用集群V1-11-1安装记录/&via=http://blog.githink.cn" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://blog.githink.cn/2018/09/13/k8s高可用集群V1-11-1安装记录/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACrElEQVR42u3aQXIbMQwEQP//084DHK1mADJWqnpPKou1RvNAQgC+vuLn+8fz/G2yZv9/jz14eHh469B/vu456FfvfPVf9iuTmPHw8PBu855DfF7zamW+cfn1024rHh4e3ufw8jR6Rn0G4+Hh4f1fvBYTBVGS8PDw8D6BtzmynwNNNuV55fNfjtVa8PDw8GJe3kX6nM9X+nt4eHh46656e+DmoZwaI3gTLR4eHt61gzAPPS9b7Au4bfr+ciUeHh7eNd7saYuq7djWbCAMDw8P7x4vOb7zJLhNjmcF4qT9Vkwu4OHh4ZW89jieMWatsk1KjYeHh3eb16a5+QHdlhhmV0u9FA8PD+8oL0+j2/GpfXtslujj4eHhneU9h9gOOSWYvGg7u8z+MhmBh4eHd5SXFyM2aXE+yJWXboflEjw8PLw1b5iDl9dA/u3hyjQeHh7eBd6+fbVphiUl4NmgwHCMAA8PDy/g7Vv7+1y+bYAVG42Hh4d3gZdjZkOlm+1ICsHD4QM8PDy8BW82FjAbydoXPuqCLx4eHt5l3uyIz7egheUb9GYyAg8PD+8oLy+z3gjuQBMrL2rg4eHhHeK1I1NtmrtJlDcbhIeHh3ePlxzomxGBPBVuY8ibanh4eHg3eO04ad5Va1tZSWkjH6LFw8PDu81rm0x1Ors4+mfDDXh4eHi3eXk5YP85L8i2RYeX9Wk8PDy8f8LLxwJmZdZk1KC9ZopfDHh4eHgj3nf5zAoHs2R9MzKLh4eHd4+XPwl4k1i324qHh4f3u7z9q5/BSQLdlmuLEjAeHh7eNd4mwZ2FMgPXhWA8PDy8j+G1gbZDVLPBgjcNMDw8PLxf5c0O/bykm7fN3lwqeHh4eNd4Zwu1bdNr84boYsDDw8M7yqt/3i+GBma9uIswPDw8vG7NH9gekTY36sqOAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
