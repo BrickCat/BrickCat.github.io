@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    <meta name="google-site-verification" content="-WQa8QobZKPAWznbgwr720xghSrxqhw3bJpog11gp60">
+    
+    
+    <link rel="canonical" href="https://blog.githink.cn/2019/04/09/Uni-App-集成个推/">
+    
+    
+    <title>Uni-App 集成个推 | 信客博客 | githink.cn</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="App,Uni-App,个推,推送">
+    <meta name="description" content="1、申请UniPush插件使用权限 打开manifest.json-&amp;gt;App SDK配置-&amp;gt;推送-&amp;gt;DCloud Push-&amp;gt;配置 （需要实名制认证） 打开manifest.json-&amp;gt;App模块权限配置-&amp;gt;打包模块配置-&amp;gt;Push(消息推送) 包名在云打包时可以获取。2、Java后台集成个推1.添加Jar包在pom.xml中添加如下：123456&amp;lt;">
+<meta name="keywords" content="App,Uni-App,个推,推送">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Uni-App 集成个推">
+<meta property="og:url" content="https://blog.githink.cn/2019/04/09/Uni-App-集成个推/index.html">
+<meta property="og:site_name" content="信客博客">
+<meta property="og:description" content="1、申请UniPush插件使用权限 打开manifest.json-&amp;gt;App SDK配置-&amp;gt;推送-&amp;gt;DCloud Push-&amp;gt;配置 （需要实名制认证） 打开manifest.json-&amp;gt;App模块权限配置-&amp;gt;打包模块配置-&amp;gt;Push(消息推送) 包名在云打包时可以获取。2、Java后台集成个推1.添加Jar包在pom.xml中添加如下：123456&amp;lt;">
+<meta property="og:locale" content="zh">
+<meta property="og:updated_time" content="2019-04-09T09:32:34.840Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Uni-App 集成个推">
+<meta name="twitter:description" content="1、申请UniPush插件使用权限 打开manifest.json-&amp;gt;App SDK配置-&amp;gt;推送-&amp;gt;DCloud Push-&amp;gt;配置 （需要实名制认证） 打开manifest.json-&amp;gt;App模块权限配置-&amp;gt;打包模块配置-&amp;gt;Push(消息推送) 包名在云打包时可以获取。2、Java后台集成个推1.添加Jar包在pom.xml中添加如下：123456&amp;lt;">
+    
+        <link rel="alternate" type="application/atom+xml" title="信客博客" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">信客</h5>
+          <a href="mailto:549595297@qq.com" title="549595297@qq.com" class="mail">549595297@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://blog.githink.cn/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://blog.githink.cn/categories"  >
+                <i class="icon icon-lg icon-server"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/githinkcn" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://code.githink.cn" target="_blank" >
+                <i class="icon icon-lg icon-paw"></i>
+                gogs
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://blog.githink.cn/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Uni-App 集成个推</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Uni-App 集成个推</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-04-09T09:30:46.000Z" itemprop="datePublished" class="page-time">
+  2019-04-09
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/App/">App</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/App/推送/">推送</a></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1、申请UniPush插件使用权限"><span class="post-toc-number">1.</span> <span class="post-toc-text">1、申请UniPush插件使用权限</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2、Java后台集成个推"><span class="post-toc-number">2.</span> <span class="post-toc-text">2、Java后台集成个推</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3、swagger调用"><span class="post-toc-number">3.</span> <span class="post-toc-text">3、swagger调用</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4、前端监听推送和点击事件"><span class="post-toc-number">4.</span> <span class="post-toc-text">4、前端监听推送和点击事件</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-Uni-App-集成个推"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Uni-App 集成个推</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-04-09 17:30:46" datetime="2019-04-09T09:30:46.000Z"  itemprop="datePublished">2019-04-09</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/App/">App</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/App/推送/">推送</a></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="1、申请UniPush插件使用权限"><a href="#1、申请UniPush插件使用权限" class="headerlink" title="1、申请UniPush插件使用权限"></a>1、申请UniPush插件使用权限</h3><ul>
+<li>打开<code>manifest.json</code>-&gt;<code>App SDK配置</code>-&gt;<code>推送</code>-&gt;<code>DCloud Push</code>-&gt;<code>配置</code> （需要实名制认证）</li>
+<li>打开<code>manifest.json</code>-&gt;<code>App模块权限配置</code>-&gt;<code>打包模块配置</code>-&gt;<code>Push(消息推送)</code></li>
+<li>包名在云打包时可以获取。<h3 id="2、Java后台集成个推"><a href="#2、Java后台集成个推" class="headerlink" title="2、Java后台集成个推"></a>2、Java后台集成个推</h3>1.添加Jar包<br>在<code>pom.xml</code>中添加如下：<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--个推--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.gexin.platform<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>gexin-rp-sdk-http<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.1.0.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">repositories</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--个推私服--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">repository</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span>&gt;</span>getui-nexus<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://mvn.gt.igexin.com/nexus/content/repositories/releases/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">repository</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">repositories</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>消息推送工具类</li>
+</ol>
+<p>消息格式：<code>{&quot;title&quot;: &quot;xxx&quot;,&quot;content&quot;: &quot;xxx&quot;,&quot;payload&quot;: &quot;xxx&quot;}</code></p>
+<p><strong>AppPushUtil.java</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.chinaunicom.sdsi.app.attendance.util;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cn.chinaunicom.sdsi.app.attendance.config.AppPushConstant;</span><br><span class="line"><span class="keyword">import</span> com.alibaba.fastjson.JSONObject;</span><br><span class="line"><span class="keyword">import</span> com.gexin.rp.sdk.base.IPushResult;</span><br><span class="line"><span class="keyword">import</span> com.gexin.rp.sdk.base.impl.SingleMessage;</span><br><span class="line"><span class="keyword">import</span> com.gexin.rp.sdk.base.impl.Target;</span><br><span class="line"><span class="keyword">import</span> com.gexin.rp.sdk.base.payload.APNPayload;</span><br><span class="line"><span class="keyword">import</span> com.gexin.rp.sdk.http.IGtPush;</span><br><span class="line"><span class="keyword">import</span> com.gexin.rp.sdk.template.TransmissionTemplate;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.lang3.StringUtils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"><span class="keyword">import</span> java.util.Set;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> 毛子坤</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Title</span>: $&#123;file_name&#125;</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Package</span> $&#123;package_name&#125;</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Description</span>: $&#123;todo&#125;</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2019/4/915:55</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AppPushUtil</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String appId = <span class="string">"t0OtmULeTI64zCeJ6Zctp7"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String appKey = <span class="string">"WKD8OZLMTp7osmkjIIBkt8"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String masterSecret = <span class="string">"0S82U6rQ4Q9FwHYPjx5bI7"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String url  = <span class="string">"http://sdk.open.api.igexin.com/apiex.htm"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">doPush</span><span class="params">(String clientId, String title, String content, JSONObject payload)</span></span>&#123;</span><br><span class="line">        JSONObject jsonObject = <span class="keyword">new</span> JSONObject();</span><br><span class="line">        jsonObject.put(AppPushConstant.TITLE, title);</span><br><span class="line">        jsonObject.put(AppPushConstant.CONTENT, content);</span><br><span class="line">        jsonObject.put(AppPushConstant.PAYLOAD, payload.toJSONString());</span><br><span class="line"></span><br><span class="line">        pushMessage(clientId,jsonObject);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 推送透传消息</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> clientId 终端Id</span></span><br><span class="line"><span class="comment">     *          </span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> IPushResult <span class="title">pushMessage</span><span class="params">(String clientId, JSONObject json)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (StringUtils.isBlank(clientId)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        IGtPush push = <span class="keyword">new</span> IGtPush(url, appKey, masterSecret);</span><br><span class="line"></span><br><span class="line">        TransmissionTemplate template = getTemplate(json);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//定义消息推送方式为，单推</span></span><br><span class="line">        SingleMessage message = <span class="keyword">new</span> SingleMessage();</span><br><span class="line">        <span class="comment">// 设置推送消息的内容</span></span><br><span class="line">        message.setData(template);</span><br><span class="line">        <span class="comment">// 设置推送目标</span></span><br><span class="line">        Target target = <span class="keyword">new</span> Target();</span><br><span class="line">        target.setAppId(appId);</span><br><span class="line">        <span class="comment">// 设置cid</span></span><br><span class="line">        target.setClientId(clientId);</span><br><span class="line">        <span class="comment">// 获得推送结果</span></span><br><span class="line">        IPushResult result = push.pushMessageToSingle(message, target);</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * 1. 失败：&#123;result=sign_error&#125;</span></span><br><span class="line"><span class="comment">         * 2. 成功：&#123;result=ok, taskId=OSS-0212_1b7578259b74972b2bba556bb12a9f9a, status=successed_online&#125;</span></span><br><span class="line"><span class="comment">         * 3. 异常</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 透传消息的模板</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> TransmissionTemplate <span class="title">getTemplate</span><span class="params">(JSONObject json)</span> </span>&#123;</span><br><span class="line">        TransmissionTemplate template = <span class="keyword">new</span> TransmissionTemplate();</span><br><span class="line">        template.setAppId(appId);</span><br><span class="line">        template.setAppkey(appKey);</span><br><span class="line">        <span class="comment">// 透传消息设置，1为强制启动应用，客户端接收到消息后就会立即启动应用；2为等待应用启动</span></span><br><span class="line">        template.setTransmissionType(<span class="number">1</span>);</span><br><span class="line">        System.out.println(json.toJSONString());</span><br><span class="line">        APNPayload payload = <span class="keyword">new</span> APNPayload();</span><br><span class="line"></span><br><span class="line">        String title = json.getString(AppPushConstant.TITLE);</span><br><span class="line">        String body = json.getString(AppPushConstant.CONTENT);</span><br><span class="line">        <span class="keyword">if</span> (!StringUtils.isEmpty(title) &amp;&amp; !StringUtils.isEmpty(body)) &#123;</span><br><span class="line">            payload.setAlertMsg(getDictionaryAlertMsg(title, body));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 在已有数字基础上加1显示，设置为-1时，在已有数字上减1显示，设置为数字时，显示指定数字</span></span><br><span class="line">        payload.setAutoBadge(<span class="string">"+1"</span>);</span><br><span class="line">        payload.setContentAvailable(<span class="number">1</span>);</span><br><span class="line">        payload.setSound(<span class="string">"default"</span>);</span><br><span class="line">        payload.setCategory(<span class="string">"$由客户端定义"</span>);</span><br><span class="line"></span><br><span class="line">        Set&lt;Map.Entry&lt;String, Object&gt;&gt; entrySet = json.entrySet();</span><br><span class="line">        <span class="keyword">for</span> (Map.Entry&lt;String, Object&gt; entry : entrySet) &#123;</span><br><span class="line">            payload.addCustomMsg(entry.getKey(), entry.getValue());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        template.setAPNInfo(payload);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> template;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> APNPayload.<span class="function">DictionaryAlertMsg <span class="title">getDictionaryAlertMsg</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">            String title, String body)</span> </span>&#123;</span><br><span class="line">        APNPayload.DictionaryAlertMsg alertMsg = <span class="keyword">new</span> APNPayload.DictionaryAlertMsg();</span><br><span class="line">        alertMsg.setBody(body);</span><br><span class="line">        alertMsg.setActionLocKey(<span class="string">"ActionLockey"</span>);</span><br><span class="line">        alertMsg.setLocKey(<span class="string">"LocKey"</span>);</span><br><span class="line">        alertMsg.addLocArg(<span class="string">"loc-args"</span>);</span><br><span class="line">        alertMsg.setLaunchImage(<span class="string">"launch-image"</span>);</span><br><span class="line">        <span class="comment">// iOS8.2以上版本支持</span></span><br><span class="line">        alertMsg.setTitle(title);</span><br><span class="line">        alertMsg.setTitleLocKey(<span class="string">"TitleLocKey"</span>);</span><br><span class="line">        alertMsg.addTitleLocArg(<span class="string">"TitleLocArg"</span>);</span><br><span class="line">        <span class="keyword">return</span> alertMsg;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>消息体属性名统一配置：</p>
+<p><strong>AppPushConstant.java</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AppPushConstant</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String TITLE = <span class="string">"title"</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String CONTENT = <span class="string">"content"</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String PAYLOAD = <span class="string">"payload"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>参数接收体：</p>
+<p><strong>AppPushBody.java</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.chinaunicom.sdsi.app.attendance.bo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cn.chinaunicom.sdsi.framework.request.BaseRequest;</span><br><span class="line"><span class="keyword">import</span> io.swagger.annotations.ApiModel;</span><br><span class="line"><span class="keyword">import</span> io.swagger.annotations.ApiModelProperty;</span><br><span class="line"><span class="keyword">import</span> org.hibernate.validator.constraints.Length;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> 毛子坤</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Title</span>: $&#123;file_name&#125;</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Package</span> $&#123;package_name&#125;</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Description</span>: $&#123;todo&#125;</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2019/4/916:25</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@ApiModel</span>(value=<span class="string">"推送对象"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AppPushBody</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = <span class="number">1L</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiModelProperty</span>(value = <span class="string">"终端Id，多个[,]号隔开"</span>,required = <span class="keyword">true</span>)</span><br><span class="line">    <span class="keyword">private</span> String clientIds;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Length</span>(message = <span class="string">"标题最多30个字符"</span>, max = <span class="number">30</span>)</span><br><span class="line">    <span class="meta">@ApiModelProperty</span>(value = <span class="string">"标题"</span>,required = <span class="keyword">true</span>)</span><br><span class="line">    <span class="keyword">private</span> String title;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Length</span>(message = <span class="string">"内容最多800个字符"</span>,max = <span class="number">800</span>)</span><br><span class="line">    <span class="meta">@ApiModelProperty</span>(value = <span class="string">"内容"</span>, required = <span class="keyword">true</span>)</span><br><span class="line">    <span class="keyword">private</span> String content;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiModelProperty</span>(value = <span class="string">"参数Id"</span>, required = <span class="keyword">true</span>)</span><br><span class="line">    <span class="keyword">private</span> String detailId;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getClientIds</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> clientIds;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setClientIds</span><span class="params">(String clientIds)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.clientIds = clientIds;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getTitle</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> title;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTitle</span><span class="params">(String title)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.title = title;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getContent</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> content;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setContent</span><span class="params">(String content)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.content = content;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getDetailId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> detailId;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setDetailId</span><span class="params">(String detailId)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.detailId = detailId;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>swagger接口调用：</p>
+<p><strong>AppPushController.java</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.chinaunicom.sdsi.app.attendance.controller;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cn.chinaunicom.sdsi.app.attendance.bo.AppPushBody;</span><br><span class="line"><span class="keyword">import</span> cn.chinaunicom.sdsi.app.attendance.util.AppPushUtil;</span><br><span class="line"><span class="keyword">import</span> cn.chinaunicom.sdsi.framework.base.BaseController;</span><br><span class="line"><span class="keyword">import</span> cn.chinaunicom.sdsi.framework.enums.ResponseEnum;</span><br><span class="line"><span class="keyword">import</span> cn.chinaunicom.sdsi.framework.exception.BusinessException;</span><br><span class="line"><span class="keyword">import</span> cn.chinaunicom.sdsi.framework.response.BaseResponse;</span><br><span class="line"><span class="keyword">import</span> cn.chinaunicom.sdsi.system.role.bo.SysRoleQueryRequestBody;</span><br><span class="line"><span class="keyword">import</span> cn.chinaunicom.sdsi.system.role.vo.SysRolePermissionVO;</span><br><span class="line"><span class="keyword">import</span> com.alibaba.fastjson.JSONObject;</span><br><span class="line"><span class="keyword">import</span> io.swagger.annotations.Api;</span><br><span class="line"><span class="keyword">import</span> io.swagger.annotations.ApiOperation;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.PostMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestBody;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RestController;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> 毛子坤</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Title</span>: $&#123;file_name&#125;</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Package</span> $&#123;package_name&#125;</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Description</span>: $&#123;todo&#125;</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2019/4/916:22</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Api</span>(</span><br><span class="line">        tags = &#123;<span class="string">"推送管理接口"</span>&#125;</span><br><span class="line">)</span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/push"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AppPushController</span> <span class="keyword">extends</span> <span class="title">BaseController</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger log = LoggerFactory.getLogger(AppPushController.class);</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiOperation</span>(</span><br><span class="line">            value = <span class="string">"向一个或多个终端发推送"</span>,</span><br><span class="line">            notes = <span class="string">"根据clientId向终端发推送"</span></span><br><span class="line">    )</span><br><span class="line">    <span class="meta">@PostMapping</span>(<span class="string">"/doPush"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> BaseResponse&lt;Object&gt; <span class="title">findPermissionsByRole</span><span class="params">(@RequestBody AppPushBody appPushBody)</span> <span class="keyword">throws</span> BusinessException </span>&#123;</span><br><span class="line"></span><br><span class="line">        String clientIds[] = appPushBody.getClientIds().split(<span class="string">","</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (String clientId : clientIds)&#123;</span><br><span class="line">            JSONObject playload = <span class="keyword">new</span> JSONObject();</span><br><span class="line">            playload.put(<span class="string">"detailId"</span>,appPushBody.getDetailId());</span><br><span class="line">            AppPushUtil.doPush(clientId,appPushBody.getTitle(),appPushBody.getContent(),playload);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.ok(<span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3、swagger调用"><a href="#3、swagger调用" class="headerlink" title="3、swagger调用"></a>3、swagger调用</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST "http://localhost:8081/push/doPush" -H "accept: */*" -H "Content-Type: application/json" -d "&#123; \"clientIds\": \"ec68aa86daf96d885d15128aa5c0224a\", \"content\": \"11111111\", \"detailId\": \"111111\", \"length\": 0, \"start\": 0, \"title\": \"222222222222\"&#125;"</span><br></pre></td></tr></table></figure>
+<h3 id="4、前端监听推送和点击事件"><a href="#4、前端监听推送和点击事件" class="headerlink" title="4、前端监听推送和点击事件"></a>4、前端监听推送和点击事件</h3><p><a href="https://ask.dcloud.net.cn/file/download/file_name-dW5pLXB1c2guemlw__url-Ly9pbWctY2RuLXFpbml1LmRjbG91ZC5uZXQuY24vdXBsb2Fkcy9hcnRpY2xlLzIwMTkwMzIyL2IxMjQyZmU0M2FhZWFhNTQ0YTJkM2I5OGFiYWZjZjU0" target="_blank" rel="noopener">官方Demo</a></p>
+<p><code>App.vue</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">	export default &#123;</span><br><span class="line">		onLaunch: function() &#123;</span><br><span class="line">			console.log(&apos;App Launch&apos;)</span><br><span class="line">			// #ifdef APP-PLUS</span><br><span class="line">			const _self = this;</span><br><span class="line">			const _handlePush = function(message) &#123;</span><br><span class="line">				console.log(message)</span><br><span class="line">				//根据条件跳转</span><br><span class="line">// 				uni.navigateTo(&#123;</span><br><span class="line">// 					url: &apos;../fire/detail?detailID=&apos;+message.payload.id</span><br><span class="line">// 				&#125;);</span><br><span class="line">			&#125;;</span><br><span class="line">			</span><br><span class="line">			plus.push.addEventListener(&apos;click&apos;, function(message) &#123;</span><br><span class="line">				_handlePush(message);</span><br><span class="line">			&#125;);</span><br><span class="line">			plus.push.addEventListener(&apos;receive&apos;, function(message) &#123;</span><br><span class="line">				_handlePush(message)</span><br><span class="line">			&#125;);</span><br><span class="line">			// #endif</span><br><span class="line">		&#125;,</span><br><span class="line">		onShow: function() &#123;</span><br><span class="line">			console.log(&apos;App Show&apos;)</span><br><span class="line">			var info = plus.push.getClientInfo();</span><br><span class="line">			console.log( JSON.stringify( info ) );</span><br><span class="line">		&#125;,</span><br><span class="line">		onHide: function() &#123;</span><br><span class="line">			console.log(&apos;App Hide&apos;)</span><br><span class="line">		&#125;,</span><br><span class="line">		methods: &#123;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style&gt;</span><br><span class="line">	/*每个页面公共css */</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-04-09T09:32:34.840Z" itemprop="dateUpdated">2019-04-09 17:32:34</time>
+</span><br>
+
+
+        
+        <p style="font-size:16px;">欢迎大家去 <a href="https://githink.cn" target="_blank" style="color:red;">信客</a> 社区注册互动，那里是黑客和健身热爱者的聚集地，那里有你需要的一切。</p><br/>本文首发于 信客博客（ http://blog.githink.cn ），版权所有，侵权必究。
+        
+    </div>
+    <footer>
+        <a href="https://blog.githink.cn">
+            <img src="/img/avatar.png" alt="信客">
+            信客
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/App/">App</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Uni-App/">Uni-App</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/个推/">个推</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/推送/">推送</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.githink.cn/2019/04/09/Uni-App-集成个推/&title=《Uni-App 集成个推》 — 信客博客&pic=https://blog.githink.cn/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blog.githink.cn/2019/04/09/Uni-App-集成个推/&title=《Uni-App 集成个推》 — 信客博客&source=健身 IT Nginx FFmpeg Fitness Java WeChat Android Web Html Video Js Css Ps Kuber..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.githink.cn/2019/04/09/Uni-App-集成个推/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Uni-App 集成个推》 — 信客博客&url=https://blog.githink.cn/2019/04/09/Uni-App-集成个推/&via=https://blog.githink.cn" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.githink.cn/2019/04/09/Uni-App-集成个推/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/02/19/Spring-cloud使用自定义注解记录请求日志/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Spring Cloud使用自定义注解记录请求日志</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="SOHUCS" sid="请将此处替换为配置SourceID的语句"></div>
+    <script charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/changyan.js" ></script>
+    <script type="text/javascript">
+        document.getElementById("SOHUCS").setAttribute("sid", new Date().getTime());
+        window._config = { showScore: true };
+        window.changyan.api.config({
+            appid: 'cytOzJShe',
+            conf: 'prod_6843d0b59b700c880a61f3deb85de2b2'
+        });
+    </script>
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        对你有帮助就赞助一下吧~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>信客 &copy; 2017 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">鲁ICP备18040779号</a><br>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://blog.githink.cn/2019/04/09/Uni-App-集成个推/&title=《Uni-App 集成个推》 — 信客博客&pic=https://blog.githink.cn/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://blog.githink.cn/2019/04/09/Uni-App-集成个推/&title=《Uni-App 集成个推》 — 信客博客&source=健身 IT Nginx FFmpeg Fitness Java WeChat Android Web Html Video Js Css Ps Kuber..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://blog.githink.cn/2019/04/09/Uni-App-集成个推/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Uni-App 集成个推》 — 信客博客&url=https://blog.githink.cn/2019/04/09/Uni-App-集成个推/&via=https://blog.githink.cn" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://blog.githink.cn/2019/04/09/Uni-App-集成个推/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACNElEQVR42u3awY7DIAxF0f7/T6fbStMw99mkEnBZjSImcLJwbczrhcf1MT6fkPl3M+/eOX5za8iQIWNZxjUc423xhS8w/n4gMl+GDBnnMO4W5nNqsFpYlyFDhgzCGD/h/zsO3zJkyJDRZ5BN8HK3E+hlyJBxAoMXlnxD6UxSPE+oxWXIkLEgg5+6//7vR/obMmTIWIpxhaNWgpLwzYPsl3fKkCFja8ZzaV8KJkX1P/uRIUPGAYzaNQsSNOe2HOIEUYYMGYsz0nSwcxDGr3/FzU4ZMmQcw0hbBSSlI6RO+ihDhowTGLM2MTf41j6BDBkyTmaQxdILELWCGa0iQ4aMTRn9QJl+An7NImghyJAhY1NGerhfK3drbNJOkCFDxgkMniYGHVEws3N4F6ShMmTI2IKRLpYmgpzNG5kTvpkMGTIWZNSO6XlQrh2oBWmrDBkyDmDwYFo7PutcFAvitAwZMjZlpEfwnUA8q2AO0kQZMmRsx6g1BtIqMg2sxfJYhgwZ2zHIVP6Ef6Bae/L2PTJkyDiAMQ6g/ApF7RAtLWVRI1OGDBnbMWbdh+WpXudwLUgNZciQsTjjCsfcxJGH6SC3lSFDxnaMWmeQb5e3SEn47l87kyFDxrqMTsnKFyOrjD9ZUMTKkCFjU0atNE2P0vq/AEFjQIYMGQczSEBML3ilB3wTlpEhQ8bWjE4InlvoTvjdkCFDxlIM3gxIy8u0AH68FpchQ8aCjFbp+Fg4TpuaMmTI2JTxBqOMvCraLRmoAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
